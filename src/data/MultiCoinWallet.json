@@ -1,0 +1,441 @@
+{
+  "id": "4168a7a5-2afc-4603-8145-e2d986c22ac4",
+  "name": "Mutil-Coin Wallet 1",
+  "balance": 0,
+  "network": {
+    "key": "mainnet",
+    "value": {
+      "messagePrefix": "\u0018Bitcoin Signed Message:\n",
+      "bech32": "bc",
+      "bip32": {
+        "public": 76067358,
+        "private": 76066276
+      },
+      "pubKeyHash": 0,
+      "scriptHash": 5,
+      "wif": 128
+    },
+    "api": "https://blockstream.info/api/",
+    "explore": "https://blockstream.info/"
+  },
+  "mnemonics": "cross stock feel exercise alien vault bitter garden spend act flower multiply",
+  "wallets": [
+    {
+      "id": "3ee91243-b917-44f1-8365-86f3147e3d4f",
+      "name": "Bitcoin",
+      "symbol": "BTC",
+      "formattedAddress": "bc1qpd...m9ad",
+      "balance": {
+        "val": 0,
+        "fiat": 0
+      },
+      "logoURI": "https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=014",
+      "wallet": {
+        "wif": "Ky8UBBdxYCboAra9c1vwzWKDEQHXLCxHh9L1jxK9peH5N81oaSbU",
+        "address": "bc1qpd3fmsuqwsh2pawsvxnu6tr7ur4xd89nc6m9ad",
+        "mnemonics": "cross stock feel exercise alien vault bitter garden spend act flower multiply",
+        "type": "HD Segwit (BIP84 Bech32 Native)"
+      }
+    },
+    {
+      "id": "d849f72c-68d3-46a0-ac83-6a0911b0e6c8",
+      "name": "Ethereum",
+      "symbol": "ETH",
+      "formattedAddress": "0x2c0B...C327",
+      "logoURI": "https://cryptologos.cc/logos/ethereum-eth-logo.png?v=013",
+      "balance": {
+        "val": "0.0",
+        "fiat": 0
+      },
+      "wallet": {
+        "_isSigner": true,
+        "address": "0x2c0B6a3132915E5A8f1b7f927A0023972007C327",
+        "provider": {
+          "_isProvider": true,
+          "_events": [],
+          "_emitted": {
+            "block": -2
+          },
+          "formatter": {
+            "formats": {
+              "transaction": {},
+              "transactionRequest": {},
+              "receiptLog": {},
+              "receipt": {},
+              "block": {},
+              "blockWithTransactions": {},
+              "filter": {},
+              "filterLog": {}
+            }
+          },
+          "anyNetwork": false,
+          "_network": {
+            "name": "rinkeby",
+            "chainId": 4,
+            "ensAddress": "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e"
+          },
+          "_maxInternalBlockNumber": 9592928,
+          "_lastBlockNumber": -2,
+          "_pollingInterval": 4000,
+          "_fastQueryDate": 1636175010983,
+          "providerConfigs": [
+            {
+              "provider": {
+                "_isProvider": true,
+                "_events": [],
+                "_emitted": {
+                  "block": -2
+                },
+                "formatter": {
+                  "formats": {
+                    "transaction": {},
+                    "transactionRequest": {},
+                    "receiptLog": {},
+                    "receipt": {},
+                    "block": {},
+                    "blockWithTransactions": {},
+                    "filter": {},
+                    "filterLog": {}
+                  }
+                },
+                "anyNetwork": false,
+                "_network": {
+                  "name": "rinkeby",
+                  "chainId": 4,
+                  "ensAddress": "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e"
+                },
+                "_maxInternalBlockNumber": -1024,
+                "_lastBlockNumber": -2,
+                "_pollingInterval": 4000,
+                "_fastQueryDate": 0,
+                "connection": {
+                  "allowGzip": true,
+                  "url": "https://rinkeby.infura.io/v3/84842078b09946638c03157f83405213"
+                },
+                "_nextId": 44,
+                "apiKey": "84842078b09946638c03157f83405213",
+                "projectId": "84842078b09946638c03157f83405213",
+                "projectSecret": null
+              },
+              "weight": 1,
+              "stallTimeout": 2000,
+              "priority": 1
+            },
+            {
+              "provider": {
+                "_isProvider": true,
+                "_events": [],
+                "_emitted": {
+                  "block": -2
+                },
+                "formatter": {
+                  "formats": {
+                    "transaction": {},
+                    "transactionRequest": {},
+                    "receiptLog": {},
+                    "receipt": {},
+                    "block": {},
+                    "blockWithTransactions": {},
+                    "filter": {},
+                    "filterLog": {}
+                  }
+                },
+                "anyNetwork": false,
+                "_network": {
+                  "name": "rinkeby",
+                  "chainId": 4,
+                  "ensAddress": "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e"
+                },
+                "_maxInternalBlockNumber": 9592928,
+                "_lastBlockNumber": -2,
+                "_pollingInterval": 4000,
+                "_fastQueryDate": 1636175010982,
+                "baseUrl": "https://api-rinkeby.etherscan.io",
+                "apiKey": "9D13ZE7XSBTJ94N9BNJ2MA33VMAY2YPIRB",
+                "_internalBlockNumber": {
+                  "_U": 2,
+                  "_V": 1,
+                  "_W": {
+                    "blockNumber": 9592928,
+                    "reqTime": 1636175009980,
+                    "respTime": 1636175010982
+                  },
+                  "_X": null
+                },
+                "_fastBlockNumber": 9592928,
+                "_fastBlockNumberPromise": {
+                  "_U": 0,
+                  "_V": 1,
+                  "_W": 9592928,
+                  "_X": null
+                }
+              },
+              "weight": 1,
+              "stallTimeout": 2000,
+              "priority": 1
+            },
+            {
+              "provider": {
+                "_isProvider": true,
+                "_events": [],
+                "_emitted": {
+                  "block": -2
+                },
+                "formatter": {
+                  "formats": {
+                    "transaction": {},
+                    "transactionRequest": {},
+                    "receiptLog": {},
+                    "receipt": {},
+                    "block": {},
+                    "blockWithTransactions": {},
+                    "filter": {},
+                    "filterLog": {}
+                  }
+                },
+                "anyNetwork": false,
+                "_network": {
+                  "name": "rinkeby",
+                  "chainId": 4,
+                  "ensAddress": "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e"
+                },
+                "_maxInternalBlockNumber": -1024,
+                "_lastBlockNumber": -2,
+                "_pollingInterval": 4000,
+                "_fastQueryDate": 0,
+                "connection": {
+                  "allowGzip": true,
+                  "url": "https://eth-rinkeby.alchemyapi.io/v2/_gg7wSSi0KMBsdKnGVfHDueq6xMB9EkC"
+                },
+                "_nextId": 43,
+                "apiKey": "_gg7wSSi0KMBsdKnGVfHDueq6xMB9EkC"
+              },
+              "weight": 1,
+              "stallTimeout": 2000,
+              "priority": 1
+            }
+          ],
+          "quorum": 1,
+          "_highestBlockNumber": 9592928,
+          "_internalBlockNumber": {
+            "_U": 2,
+            "_V": 1,
+            "_W": {
+              "blockNumber": 9592928,
+              "reqTime": 1636175009978,
+              "respTime": 1636175010982
+            },
+            "_X": null
+          },
+          "_fastBlockNumber": 9592928,
+          "_fastBlockNumberPromise": {
+            "_U": 0,
+            "_V": 1,
+            "_W": 9592928,
+            "_X": null
+          }
+        }
+      }
+    },
+    {
+      "id": "4ee53880-27b1-4f42-a3ae-26a1eede8d44",
+      "name": "Binance Smart Coin",
+      "symbol": "BNB",
+      "formattedAddress": "0x2c0B...C327",
+      "balance": {
+        "val": "0.0",
+        "fiat": 0
+      },
+      "logoURI": "https://cryptologos.cc/logos/binance-coin-bnb-logo.png?v=014",
+      "wallet": {
+        "_isSigner": true,
+        "address": "0x2c0B6a3132915E5A8f1b7f927A0023972007C327",
+        "provider": {
+          "_isProvider": true,
+          "_events": [],
+          "_emitted": {
+            "block": -2
+          },
+          "formatter": {
+            "formats": {
+              "transaction": {},
+              "transactionRequest": {},
+              "receiptLog": {},
+              "receipt": {},
+              "block": {},
+              "blockWithTransactions": {},
+              "filter": {},
+              "filterLog": {}
+            }
+          },
+          "anyNetwork": false,
+          "_network": {
+            "name": "rinkeby",
+            "chainId": 4,
+            "ensAddress": "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e"
+          },
+          "_maxInternalBlockNumber": 9592928,
+          "_lastBlockNumber": -2,
+          "_pollingInterval": 4000,
+          "_fastQueryDate": 1636175010983,
+          "providerConfigs": [
+            {
+              "provider": {
+                "_isProvider": true,
+                "_events": [],
+                "_emitted": {
+                  "block": -2
+                },
+                "formatter": {
+                  "formats": {
+                    "transaction": {},
+                    "transactionRequest": {},
+                    "receiptLog": {},
+                    "receipt": {},
+                    "block": {},
+                    "blockWithTransactions": {},
+                    "filter": {},
+                    "filterLog": {}
+                  }
+                },
+                "anyNetwork": false,
+                "_network": {
+                  "name": "rinkeby",
+                  "chainId": 4,
+                  "ensAddress": "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e"
+                },
+                "_maxInternalBlockNumber": -1024,
+                "_lastBlockNumber": -2,
+                "_pollingInterval": 4000,
+                "_fastQueryDate": 0,
+                "connection": {
+                  "allowGzip": true,
+                  "url": "https://rinkeby.infura.io/v3/84842078b09946638c03157f83405213"
+                },
+                "_nextId": 44,
+                "apiKey": "84842078b09946638c03157f83405213",
+                "projectId": "84842078b09946638c03157f83405213",
+                "projectSecret": null
+              },
+              "weight": 1,
+              "stallTimeout": 2000,
+              "priority": 1
+            },
+            {
+              "provider": {
+                "_isProvider": true,
+                "_events": [],
+                "_emitted": {
+                  "block": -2
+                },
+                "formatter": {
+                  "formats": {
+                    "transaction": {},
+                    "transactionRequest": {},
+                    "receiptLog": {},
+                    "receipt": {},
+                    "block": {},
+                    "blockWithTransactions": {},
+                    "filter": {},
+                    "filterLog": {}
+                  }
+                },
+                "anyNetwork": false,
+                "_network": {
+                  "name": "rinkeby",
+                  "chainId": 4,
+                  "ensAddress": "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e"
+                },
+                "_maxInternalBlockNumber": 9592928,
+                "_lastBlockNumber": -2,
+                "_pollingInterval": 4000,
+                "_fastQueryDate": 1636175010982,
+                "baseUrl": "https://api-rinkeby.etherscan.io",
+                "apiKey": "9D13ZE7XSBTJ94N9BNJ2MA33VMAY2YPIRB",
+                "_internalBlockNumber": {
+                  "_U": 2,
+                  "_V": 1,
+                  "_W": {
+                    "blockNumber": 9592928,
+                    "reqTime": 1636175009980,
+                    "respTime": 1636175010982
+                  },
+                  "_X": null
+                },
+                "_fastBlockNumber": 9592928,
+                "_fastBlockNumberPromise": {
+                  "_U": 0,
+                  "_V": 1,
+                  "_W": 9592928,
+                  "_X": null
+                }
+              },
+              "weight": 1,
+              "stallTimeout": 2000,
+              "priority": 1
+            },
+            {
+              "provider": {
+                "_isProvider": true,
+                "_events": [],
+                "_emitted": {
+                  "block": -2
+                },
+                "formatter": {
+                  "formats": {
+                    "transaction": {},
+                    "transactionRequest": {},
+                    "receiptLog": {},
+                    "receipt": {},
+                    "block": {},
+                    "blockWithTransactions": {},
+                    "filter": {},
+                    "filterLog": {}
+                  }
+                },
+                "anyNetwork": false,
+                "_network": {
+                  "name": "rinkeby",
+                  "chainId": 4,
+                  "ensAddress": "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e"
+                },
+                "_maxInternalBlockNumber": -1024,
+                "_lastBlockNumber": -2,
+                "_pollingInterval": 4000,
+                "_fastQueryDate": 0,
+                "connection": {
+                  "allowGzip": true,
+                  "url": "https://eth-rinkeby.alchemyapi.io/v2/_gg7wSSi0KMBsdKnGVfHDueq6xMB9EkC"
+                },
+                "_nextId": 43,
+                "apiKey": "_gg7wSSi0KMBsdKnGVfHDueq6xMB9EkC"
+              },
+              "weight": 1,
+              "stallTimeout": 2000,
+              "priority": 1
+            }
+          ],
+          "quorum": 1,
+          "_highestBlockNumber": 9592928,
+          "_internalBlockNumber": {
+            "_U": 2,
+            "_V": 1,
+            "_W": {
+              "blockNumber": 9592928,
+              "reqTime": 1636175009978,
+              "respTime": 1636175010982
+            },
+            "_X": null
+          },
+          "_fastBlockNumber": 9592928,
+          "_fastBlockNumberPromise": {
+            "_U": 0,
+            "_V": 1,
+            "_W": 9592928,
+            "_X": null
+          }
+        }
+      }
+    }
+  ]
+}

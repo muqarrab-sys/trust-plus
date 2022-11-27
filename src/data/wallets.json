@@ -1,0 +1,165 @@
+[
+  {
+    "id": "e8d3c295-003a-4af0-9022-2d724d8fd5f5",
+    "name": "Bitcoin",
+    "symbol": "BTC",
+    "address": "tb1qqwx9e6cde2c3atwvfcc5y4sn8llrtc5sa8vxxj",
+    "formattedAddress": "tb1qqw...vxxj",
+    "balance": {
+      "val": 0,
+      "fiat": 0
+    },
+    "logoURI": "https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=014",
+    "privateKey": "cTVFYbc3PvtospjVzvny7W7sCAMje4nfBAnQw4pevWHmppAT5Rk7",
+    "wallet": {
+      "wif": "cTVFYbc3PvtospjVzvny7W7sCAMje4nfBAnQw4pevWHmppAT5Rk7",
+      "address": "tb1qqwx9e6cde2c3atwvfcc5y4sn8llrtc5sa8vxxj",
+      "mnemonics": "address sock damp vacant funny merit cotton wrap aunt hammer rain insect",
+      "type": "HD Segwit (BIP84 Bech32 Native)"
+    }
+  },
+  {
+    "id": "9057a7a8-ff25-4dda-99f1-a6843c63b2fb",
+    "name": "Ethereum",
+    "symbol": "ETH",
+    "address": "0x215560c9DFaA99EB3a7627a6AD14cE20366615e8",
+    "formattedAddress": "0x2155...15e8",
+    "logoURI": "https://cryptologos.cc/logos/ethereum-eth-logo.png?v=013",
+    "balance": {
+      "val": "0.0",
+      "fiat": 0
+    },
+    "privateKey": "0x5c68907ffe804e10fe9200fefbabf1fb662421711b4ab4cc2d6458b93fb10c7b",
+    "wallet": {
+      "_isSigner": true,
+      "address": "0x215560c9DFaA99EB3a7627a6AD14cE20366615e8",
+      "provider": {
+        "_isProvider": true,
+        "_events": [],
+        "_emitted": {
+          "block": -2
+        },
+        "formatter": {
+          "formats": {
+            "transaction": {},
+            "transactionRequest": {},
+            "receiptLog": {},
+            "receipt": {},
+            "block": {},
+            "blockWithTransactions": {},
+            "filter": {},
+            "filterLog": {}
+          }
+        },
+        "anyNetwork": false,
+        "_network": {
+          "name": "rinkeby",
+          "chainId": 4,
+          "ensAddress": "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e"
+        },
+        "_maxInternalBlockNumber": -1024,
+        "_lastBlockNumber": -2,
+        "_pollingInterval": 4000,
+        "_fastQueryDate": 0,
+        "baseUrl": "https://api-rinkeby.etherscan.io",
+        "apiKey": "H2EVG1PVVV8SY8G8TAWFTMZ67T6HPI68HF"
+      }
+    }
+  },
+  {
+    "id": "6439a100-1813-4ffd-bce8-2fadb0cb6a32",
+    "name": "Binance Smart Coin",
+    "symbol": "BNB",
+    "address": "0x215560c9DFaA99EB3a7627a6AD14cE20366615e8",
+    "formattedAddress": "0x2155...15e8",
+    "balance": {
+      "val": "0.0",
+      "fiat": 0
+    },
+    "logoURI": "https://cryptologos.cc/logos/binance-coin-bnb-logo.png?v=014",
+    "privateKey": "0x5c68907ffe804e10fe9200fefbabf1fb662421711b4ab4cc2d6458b93fb10c7b",
+    "wallet": {
+      "_isSigner": true,
+      "address": "0x215560c9DFaA99EB3a7627a6AD14cE20366615e8",
+      "provider": {
+        "_isProvider": true,
+        "_events": [],
+        "_emitted": {
+          "block": -2
+        },
+        "formatter": {
+          "formats": {
+            "transaction": {},
+            "transactionRequest": {},
+            "receiptLog": {},
+            "receipt": {},
+            "block": {},
+            "blockWithTransactions": {},
+            "filter": {},
+            "filterLog": {}
+          }
+        },
+        "anyNetwork": false,
+        "_network": {
+          "name": "rinkeby",
+          "chainId": 4,
+          "ensAddress": "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e"
+        },
+        "_maxInternalBlockNumber": -1024,
+        "_lastBlockNumber": -2,
+        "_pollingInterval": 4000,
+        "_fastQueryDate": 0,
+        "baseUrl": "https://api-rinkeby.etherscan.io",
+        "apiKey": "H2EVG1PVVV8SY8G8TAWFTMZ67T6HPI68HF"
+      }
+    }
+  },
+  {
+    "id": "9057a7a8-ff25-4dda-99f1-a6843c63b2fb",
+    "name": "Ethereum",
+    "symbol": "ETH",
+    "address": "0x215560c9DFaA99EB3a7627a6AD14cE20366615e8",
+    "formattedAddress": "0x2155...15e8",
+    "logoURI": "https://cryptologos.cc/logos/ethereum-eth-logo.png?v=013",
+    "balance": {
+      "val": "0.0",
+      "fiat": 0
+    },
+    "privateKey": "0x5c68907ffe804e10fe9200fefbabf1fb662421711b4ab4cc2d6458b93fb10c7b",
+    "wallet": {
+      "_isSigner": true,
+      "address": "0x215560c9DFaA99EB3a7627a6AD14cE20366615e8",
+      "provider": {
+        "_isProvider": true,
+        "_events": [],
+        "_emitted": {
+          "block": -2
+        },
+        "formatter": {
+          "formats": {
+            "transaction": {},
+            "transactionRequest": {},
+            "receiptLog": {},
+            "receipt": {},
+            "block": {},
+            "blockWithTransactions": {},
+            "filter": {},
+            "filterLog": {}
+          }
+        },
+        "anyNetwork": false,
+        "_network": {
+          "name": "rinkeby",
+          "chainId": 4,
+          "ensAddress": "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e"
+        },
+        "_maxInternalBlockNumber": -1024,
+        "_lastBlockNumber": -2,
+        "_pollingInterval": 4000,
+        "_fastQueryDate": 0,
+        "baseUrl": "https://api-rinkeby.etherscan.io",
+        "apiKey": "H2EVG1PVVV8SY8G8TAWFTMZ67T6HPI68HF"
+      }
+    }
+  }
+]
