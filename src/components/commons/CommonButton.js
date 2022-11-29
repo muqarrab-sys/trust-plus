@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
       borderRadius: 2
   },
   text: {
-    fontWeight: 'bold',
+    fontWeight: '400',
     fontSize: 14,
   },
   icon: {

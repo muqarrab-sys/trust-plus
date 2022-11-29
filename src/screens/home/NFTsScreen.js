@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import CommonFlatList from "@components/commons/CommonFlatList";
 import CommonTouchableOpacity from "@components/commons/CommonTouchableOpacity";
@@ -7,6 +7,7 @@ import CommonImage from "@components/commons/CommonImage";
 import CommonText from "@components/commons/CommonText";
 import CommonNumber from "@components/commons/CommonNumber";
 import CommonTokenIcon from "@components/commons/CommonTokenIcon";
+import { Image } from 'react-native';
 export default function NFTsScreen({navigation, route}) {
     const {theme} = useSelector(state => state.ThemeReducer);
     const {language} = useSelector(state => state.LanguageReducer);
@@ -18,7 +19,23 @@ export default function NFTsScreen({navigation, route}) {
 
     return (
         <SafeAreaView style={[styles.container,{backgroundColor : theme.mainColor2}]}>
-
+            <CommonFlatList
+                data={[]}
+                ListEmptyComponent={()=>{
+                   return (
+                    <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                        <Image source={require('@assets/images/emptyNft.png')} style={{width : 100, height : 100, marginTop: 25, marginBottom: 18}}/>
+                        <CommonText>{language.collectiblesWillAppear}</CommonText>
+                        <TouchableOpacity style={{marginTop: 20}}>
+                            <CommonText style={{fontWeight: '700', fontSize: 15, color: theme.backgroundColor2}}>{language.receive}</CommonText>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{marginTop: 30}}>
+                            <CommonText style={{fontSize: 15, color: theme.backgroundColor2}}>{language.openOnOpenSea}</CommonText>
+                        </TouchableOpacity>
+                    </View>
+                   );
+                }}
+            />
         </SafeAreaView>
     );
 }

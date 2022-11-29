@@ -7,6 +7,8 @@ import CommonText from "@components/commons/CommonText";
 import CommonButton from "@components/commons/CommonButton";
 import CommonBackButton from "@components/commons/CommonBackButton";
 import {deleteUserPinCode} from "@haskkor/react-native-pincode";
+import CommonTouchableOpacity from '@components/commons/CommonTouchableOpacity';
+import CommonHeader from '@components/commons/CommonHeader';
 
 export default function MnemonicsScreen({navigation, route}) {
     const [mnemonics, setMnemonics] = useState(null);
@@ -23,38 +25,52 @@ export default function MnemonicsScreen({navigation, route}) {
     const renderMnemonic = (mnemonic, index) => (
         <View style={[styles.mnemonic,{backgroundColor : theme.backgroundColor1}]} key={index}>
             <View style={{width: '80%'}}>
-                <CommonText style={{textAlign: 'left', fontWeight : 'bold'}}>{index + 1}. {mnemonic}</CommonText>
+                <CommonText style={{textAlign: 'center', fontWeight : '400', fontSize: 12}}>
+                    <CommonText style={{color: '#8C8C8C'}}>{index + 1}  </CommonText>
+                    <CommonText>{mnemonic}</CommonText>
+                </CommonText>
             </View>
         </View>
     );
     const renderBody = () => {
         return (
-            <View style={styles.mnemonicsContainer}>
-                {mnemonics && mnemonics.map(renderMnemonic)}
-            </View>
+            <>
+                <View style={styles.mnemonicsContainer}>
+                    {mnemonics && mnemonics.slice(0, 11).map(renderMnemonic)}
+                </View>
+                <View style={styles.mnemonicsContainer}>
+                    {mnemonics && renderMnemonic(mnemonics[11], 11)}
+                </View>
+            </>
         );
     };
     return (
         <Root>
             <SafeAreaView style={[styles.container,{backgroundColor : theme.backgroundColor1}]}>
-                <View style={styles.header}>
-                    <CommonBackButton color={'black'} onPress={async () => {
+                <CommonHeader
+                    onPressBack={async () => {
                         await deleteUserPinCode();
                         navigation.reset({
                             routes: [{ name: 'EntryScreen'}],
                         });
-                    }}/>
-
-                </View>
+                    }}
+                    title={lang.yourRecoveryPhrase}
+                />
                 <View style={[styles.layerContainer,{backgroundColor : theme.backgroundColor1}]}>
                     <View style={styles.logoContainer}>
-                        <CommonText style={{fontSize: 30}}>{lang.yourRecoveryPhrase}</CommonText>
                         <CommonText style={{color: theme.textColor2, textAlign:'center'}}>{lang.writeDown}</CommonText>
                     </View>
                     <View style={styles.contentContainer}>
                         {renderBody()}
                     </View>
                     <View style={styles.buttonContainer}>
+                        <CommonTouchableOpacity>
+                            <CommonText style={[styles.copyButton, {color: theme.buttonColor1}]}>{lang.copy}</CommonText>
+                        </CommonTouchableOpacity>
+                        <View style={[styles.warningBox, {backgroundColor: theme.warningBackgroundColor, borderColor: theme.warningText}]}>
+                            <CommonText style={{fontSize: 14, fontWeight: '700', color: theme.warningText, marginBottom: 20}}>{lang.doNotShare}</CommonText>
+                            <CommonText style={{fontSize: 12, fontWeight: '400', color: theme.warningText, textAlign: 'center'}}>{lang.itWillGiveFullAccess}</CommonText>
+                        </View>
                         <View style={styles.row}>
                             <CommonButton
                                 label={lang.continue}
@@ -70,13 +86,6 @@ export default function MnemonicsScreen({navigation, route}) {
     );
 }
 const styles = StyleSheet.create({
-    header: {
-        height: 50,
-        width: '100%',
-        paddingLeft: 10,
-        paddingRight: 10,
-        flexDirection: 'row',
-    },
     topBackBg: {
         height: 250,
         width: '100%',
@@ -136,8 +145,8 @@ const styles = StyleSheet.create({
     },
     mnemonic: {
         margin: 5,
-        width: 130,
-        height: 50,
+        width: 90,
+        height: 32,
         backgroundColor: 'white',
         borderRadius: 5,
         justifyContent: 'center',
@@ -152,5 +161,19 @@ const styles = StyleSheet.create({
         justifyContent : 'center',
         alignItems : 'center',
         padding : 10
+    },
+    warningBox : {
+        borderWidth: 1,
+        borderRadius: 5,
+        width: '100%',
+        padding: 10,
+        marginVertical: 20,
+        alignItems: 'center',
+    },
+    copyButton: {
+        textAlign:'center',
+        textTransform: 'uppercase',
+        fontSize: 18,
+        fontWeight: '700',
     }
 });

@@ -18,7 +18,7 @@ export default function RegisterScreen({navigation}){
                     <Swiper showsButtons={false}>
                         <View style={styles.sliderImage}>
                             <Image source={require('@assets/swiper/01.png')} style={{width : 388, height : 388}} resizeMode={'contain'}/>
-                            <CommonText style={{fontSize: 30}}>{lang.privateAndSecure}</CommonText>
+                            <CommonText style={{fontSize: 30}}>{lang.safeAndSecure}</CommonText>
                             <CommonText>{lang.privateKeysNeverLeaveYourDevice}</CommonText>
                         </View>
                         <View style={styles.sliderImage}>
@@ -30,6 +30,11 @@ export default function RegisterScreen({navigation}){
                             <Image source={require('@assets/swiper/03.png')} style={{width : 388, height : 388}} resizeMode={'contain'}/>
                             <CommonText style={{fontSize: 30}}>{lang.tradeAssets}</CommonText>
                             <CommonText>{lang.tradeYourAssetsAnonymously}</CommonText>
+                        </View>
+                        <View style={styles.sliderImage}>
+                            <Image source={require('@assets/swiper/04.png')} style={{width : 388, height : 388}} resizeMode={'contain'}/>
+                            <CommonText style={{fontSize: 30}}>{lang.exploreDecentralizedApps}</CommonText>
+                            <CommonText>{lang.makeYourDreamsComeTrue}</CommonText>
                         </View>
                     </Swiper>
                 </View>
@@ -74,7 +79,7 @@ const styles = StyleSheet.create({
         paddingRight: 10,
     },
     contentContainer: {
-        flex: 1.8,
+        flex: 2.5,
     },
     block: {
         width: '100%',
@@ -144,7 +149,7 @@ const styles = StyleSheet.create({
         width : '100%',
         height : '100%',
         justifyContent: 'center',
-        alignItems : 'center'
+        alignItems : 'center',
     },
     blurBackground: {
         width: '100%',

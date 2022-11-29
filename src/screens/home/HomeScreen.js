@@ -23,6 +23,10 @@ import {WalletService} from '@persistence/wallet/WalletService';
 import {useNavigation} from '@react-navigation/native';
 import CommonBackButton from '@components/commons/CommonBackButton';
 import {cos} from 'react-native-reanimated';
+import Cash from '@components/icons/Cash';
+import Swap from '@components/icons/Swap';
+import Send from '@components/icons/Send';
+import Receive from '@components/icons/Receive';
 
 export default function MainScreen({route}) {
   const dispatch = useDispatch();
@@ -39,14 +43,22 @@ export default function MainScreen({route}) {
   }, []);
   return (
     <SafeAreaView
-      style={[styles.container, {backgroundColor: theme.mainColor}]}>
-      <View style={[styles.top, {backgroundColor: theme.mainColor}]}></View>
+      style={[styles.container, {backgroundColor: theme.buttonColor1}]}>
+      <View style={[styles.top, {backgroundColor: theme.buttonColor1}]}></View>
       <View style={styles.header}>
-        <CommonTokenIcon
-          uri={activeWallet?.logoURI}
-          resizeMode={'contain'}
-          style={{width: 32, height: 32}}
-        />
+        <View style={{flex: 0.5}}>
+          <CommonTouchableOpacity>
+            <Bell />
+          </CommonTouchableOpacity>
+        </View>
+
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <CommonCurrency
+            style={[styles.balanceText, {color: theme.textColor3}]}
+            value={activeWallet?.balance?.fiat}/>
+        </View>
+
+        <View style={{flex: 0.5}} />
         {activeWallet?.network?.symbol !== 'BTC' && (
           <CommonTouchableOpacity
             onPress={() => {
@@ -57,9 +69,6 @@ export default function MainScreen({route}) {
         )}
       </View>
       <View style={styles.balance}>
-        <CommonCurrency
-          style={[styles.balanceText, {color: theme.textColor3}]}
-          value={activeWallet?.balance?.fiat}></CommonCurrency>
         <CommonText style={[styles.walletText, {color: theme.textColor3}]}>
           {activeWallet?.name}
         </CommonText>
@@ -67,6 +76,83 @@ export default function MainScreen({route}) {
       <View style={styles.controlContainer}>
         <View style={styles.control}>
           <CommonTouchableOpacity
+            style={styles.element}
+            onPress={() => console.log('pressed')}>
+            <View style={styles.elementIcon}>
+              <Cash />
+            </View>
+            <CommonText style={{color: theme.textColor3}}>
+              {lang?.buy}
+            </CommonText>
+          </CommonTouchableOpacity>
+          <CommonTouchableOpacity
+            style={styles.element}
+            onPress={() => console.log('pressed')}>
+            <View style={styles.elementIcon}>
+              <Swap />
+            </View>
+            <CommonText style={{color: theme.textColor3}}>
+              {lang?.swap}
+            </CommonText>
+          </CommonTouchableOpacity>
+          <CommonTouchableOpacity
+            style={styles.element}
+            onPress={() => {
+              // console.log('====================================');
+              // console.log('kfsdbsbsfgn', activeWallet?.network?.symbol);
+              // console.log('====================================');
+              // let nextScreen = 'BitcoinSendScreen';
+              // console.log('nextScreen', nextScreen);
+              if (activeWallet?.network?.symbol === 'ETH') {
+                console.log('====================================');
+                console.log(
+                  'kfsdbsbsfgn',
+                  'EthereumSendScreen',
+                  activeWallet?.network?.symbol,
+                );
+                console.log('====================================');
+                // nextScreen = 'EthereumSendScreen';
+                navigation.navigate('EthereumSendScreen');
+                // console.log('nextScreen===inEthereum>>>>', nextScreen);
+              } else if (activeWallet?.network?.symbol === 'BNB') {
+                // nextScreen = 'SmartChainSendScreen';
+                navigation.navigate('SmartChainSendScreen');
+              } else if (activeWallet?.network?.symbol == 'BTC') {
+                navigation.navigate('BitcoinSendScreen');
+              }
+              // navigation.navigate(nextScreen);
+            }}>
+            <View style={styles.elementIcon}>
+              <Send />
+            </View>
+            <CommonText style={{color: theme.textColor3}}>
+              {lang?.send}
+            </CommonText>
+          </CommonTouchableOpacity>
+          <CommonTouchableOpacity
+            style={styles.element}
+            onPress={() => {
+              console.log(
+                'activeWallet?.network?.symbol===>>>',
+                activeWallet?.network?.symbol,
+              );
+              let nextScreen = 'BitcoinReceiveScreen';
+              if (activeWallet?.network?.symbol === 'ETH') {
+                nextScreen = 'EthereumReceiveScreen';
+              } else if (activeWallet?.network?.symbol === 'BNB') {
+                nextScreen = 'SmartChainReceiveScreen';
+              }
+              navigation.navigate(nextScreen);
+            }}>
+            <View style={styles.elementIcon}>
+              <Receive />
+            </View>
+            <CommonText style={{color: theme.textColor3}}>
+              {lang?.receive}
+            </CommonText>
+          </CommonTouchableOpacity>
+
+          {/* <CommonTouchableOpacity
             style={styles.element}
             onPress={() => {
               // console.log('====================================');
@@ -139,7 +225,7 @@ export default function MainScreen({route}) {
             <CommonText style={{color: theme.textColor3}}>
               {lang?.history}
             </CommonText>
-          </CommonTouchableOpacity>
+          </CommonTouchableOpacity> */}
         </View>
       </View>
       <View style={styles.contentContainer}>
@@ -164,8 +250,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingRight: 10,
-    paddingLeft: 10,
+    paddingHorizontal: 10,
   },
   top: {
     height: 240,
@@ -206,6 +291,9 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     backgroundColor: 'white',
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+    marginTop: -5,
   },
   activityContainer: {
     marginTop: 24,
@@ -262,7 +350,7 @@ const styles = StyleSheet.create({
   },
   balance: {
     width: '100%',
-    height: 80,
+    height: 60,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -271,16 +359,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   walletText: {
-    fontSize: 11,
+    fontSize: 16,
   },
   controlContainer: {
     width: '100%',
-    height: 100,
+    height: 120,
     justifyContent: 'center',
     alignItems: 'center',
   },
   control: {
-    width: '60%',
     height: 100,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -297,8 +384,8 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    borderRadius: 100,
+    backgroundColor: '#5C9EE2',
+    borderRadius: 10,
     marginBottom: 5,
   },
 });

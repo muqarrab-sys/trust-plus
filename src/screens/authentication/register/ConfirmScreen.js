@@ -13,6 +13,7 @@ import {WalletAction} from '@persistence/wallet/WalletAction';
 import uuid from 'react-native-uuid';
 import {CurrencyAction} from '@persistence/currency/CurrencyAction';
 import {UserAction} from '@persistence/user/UserAction';
+import CommonHeader from '@components/commons/CommonHeader';
 
 export default function ConfirmScreen({navigation, route}) {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ export default function ConfirmScreen({navigation, route}) {
   const {mnemonics} = route.params;
   const [selectable, setSelectable] = useState(_.shuffle([...mnemonics]));
   const [selected, setSelected] = useState([]);
+  const [isValid, setIsValid] = useState(false);
   console.log('selected===>>>', selected);
   console.log('selectable===>>>', selectable);
 
@@ -28,10 +30,15 @@ export default function ConfirmScreen({navigation, route}) {
 
   const onPressMnemonic = (mnemonic, isSelected) => {
     console.log('isSelected===>>', isSelected);
+
     if (isSelected) {
+      if (selected.length === (mnemonics.length - 1) && _.isEqual([...selected, mnemonic], mnemonics)) {
+        setIsValid(true);
+      }
       setSelectable(selectable.filter(m => m !== mnemonic));
       setSelected(selected.concat([mnemonic]));
     } else {
+      setIsValid(false);
       setSelectable(selectable.concat([mnemonic]));
       setSelected(selected.filter(m => m !== mnemonic));
     }
@@ -43,11 +50,12 @@ export default function ConfirmScreen({navigation, route}) {
       onPress={() => {
         onPressMnemonic(mnemonic, selected);
       }}>
-      <View style={{width: '80%'}}>
-        <CommonText style={{textAlign: 'left'}}>
-          {index + 1}. {mnemonic}
-        </CommonText>
-      </View>
+          <View style={{width: '80%'}}>
+              <CommonText style={{textAlign: 'center', fontWeight : '400', fontSize: 12}}>
+                  <CommonText style={{color: '#8C8C8C'}}>{index + 1}  </CommonText>
+                  <CommonText>{mnemonic}</CommonText>
+              </CommonText>
+          </View>
     </TouchableOpacity>
   );
   const renderSelectableMnemonic = (mnemonic, index, selected) => (
@@ -60,48 +68,54 @@ export default function ConfirmScreen({navigation, route}) {
       onPress={() => {
         onPressMnemonic(mnemonic, selected);
       }}>
-      <CommonText>{mnemonic}</CommonText>
+        <View style={{width: '80%'}}>
+          <CommonText style={{textAlign: 'center', fontWeight : '400', fontSize: 12}}>{mnemonic}</CommonText>
+        </View>
     </TouchableOpacity>
   );
-  const renderSelected = () => (
-    <View style={styles.mnemonicsContainer}>
-      {selected.map((mnemonic, index) => {
-        return renderMnemonic(mnemonic, index, false);
-      })}
-    </View>
-  );
+  const renderSelected = () => {
+    return (
+      <View style={[styles.selectedMnemonicsContainer, {backgroundColor: theme.backgroundColor4}]}>
+        <View style={styles.mnemonicsContainer}>
+          {selected.slice(0, 11).map((mnemonic, index) => renderMnemonic(mnemonic, index, false))}
+        </View>
+        <View style={styles.mnemonicsContainer}>
+          {selected[11] && renderMnemonic(selected[11], 11, false)}
+        </View>
+        <View style={styles.errorContainer}>
+          {selected.length === 12 && (
+            isValid
+                ? <CommonText style={{color: theme.successText, fontSize: 12}}>{lang.goodJob}</CommonText>
+                : <CommonText style={{color: theme.warningText2, fontSize: 12}}>{lang.isIncorrectOrder}</CommonText>
+          )}
+        </View>
+      </View>
+    )
+  }
 
   const renderSelectable = () => (
-    <View style={styles.selectableMnemonicsContainer}>
-      {selectable.map((mnemonic, index) => {
-        return renderSelectableMnemonic(mnemonic, index, true);
-      })}
-    </View>
+    <>
+      <View style={styles.selectableMnemonicsContainer}>
+        {selectable.slice(0, 11).map((mnemonic, index) => renderSelectableMnemonic(mnemonic, index, true))}
+      </View>
+      <View style={styles.selectableMnemonicsContainer}>
+          {selectable[11] && renderSelectableMnemonic(selectable[11], 11, true)}
+      </View>
+    </>
   );
   const isValidSequence = () => {
     return _.isEqual(mnemonics, selected);
   };
   return (
     <Root>
-      <SafeAreaView
-        style={[styles.container, {backgroundColor: theme.backgroundColor1}]}>
-        <View style={styles.header}>
-          <CommonBackButton
-            color={'black'}
-            onPress={async () => {
-              navigation.goBack();
-            }}
-          />
-        </View>
+      <SafeAreaView style={[styles.container, {backgroundColor: theme.backgroundColor1}]}>
+        <CommonHeader onPressBack={() => navigation.goBack()} title={lang.yourRecoveryPhrase} />
         <View
           style={[
             styles.layerContainer,
             {backgroundColor: theme.backgroundColor1},
           ]}>
           <View style={styles.logoContainer}>
-            <CommonText style={{fontSize: 30}}>
-              {lang.verifyRecoveryPhrase}
-            </CommonText>
             <CommonText style={{color: theme.textColor2, textAlign: 'center'}}>
               {lang.tapTheWord}
             </CommonText>
@@ -113,13 +127,13 @@ export default function ConfirmScreen({navigation, route}) {
               <CommonButton
                 label={lang.continue}
                 onPress={async () => {
-                  console.log('isValidSequence===>>>', isValidSequence());
-                  if (isValidSequence()) {
+                  console.log('isValidSequence===>>>', isValid);
+                  if (!isValid) {
                     CommonToast.error({
                       title: lang.error,
                       text: lang.yourSeedPhraseOrderIsIncorrect,
                     });
-                    // return;
+                    return;
                   }
                   if (selected.length && mnemonics) {
                     CommonLoading.show();
@@ -138,6 +152,7 @@ export default function ConfirmScreen({navigation, route}) {
                           dispatch(
                             WalletAction.setActiveWallet(response.btcWallet),
                           ).then(() => {
+                            console.log('response.btcWallet===>>>');
                             dispatch(CurrencyAction.getCurrency()).then(() => {
                               dispatch(UserAction.signIn({}));
                               CommonLoading.hide();
@@ -173,9 +188,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexWrap: 'wrap',
   },
+  selectedMnemonicsContainer: {
+    width: '100%',
+    height: 250,
+    borderRadius: 5,
+  },
   selectableMnemonic: {
-    width: 70,
-    height: 35,
+    width: 90,
+    height: 32,
     backgroundColor: 'white',
     borderRadius: 5,
     justifyContent: 'center',
@@ -251,14 +271,14 @@ const styles = StyleSheet.create({
   },
   mnemonic: {
     margin: 5,
-    width: 130,
-    height: 50,
+    width: 90,
+    height: 32,
     backgroundColor: 'white',
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 0.2,
-    borderColor: '#3c77b6',
+    borderColor: '#D9D9D9',
   },
   buttonContainer: {
     position: 'absolute',
@@ -267,5 +287,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
+  },
+  errorContainer: {
+    alignItems: 'center',
+    position: 'absolute',
+    width: '100%',
+    bottom: 10,
   },
 });

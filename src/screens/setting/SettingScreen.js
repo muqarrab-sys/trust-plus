@@ -12,7 +12,6 @@ import Setting2 from '@components/icons/Setting2';
 import {ThemeAction} from '@persistence/theme/ThemeAction';
 import {applicationProperties} from '@src/application.properties';
 
-
 export default function SettingScreen({navigation, route}) {
     const lang = useSelector(state => state.LanguageReducer.language);
     const {theme, defaultTheme} = useSelector(state => state.ThemeReducer);

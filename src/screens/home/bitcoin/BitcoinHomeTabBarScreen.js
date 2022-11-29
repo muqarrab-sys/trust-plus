@@ -7,6 +7,11 @@ import CommonImage from '@components/commons/CommonImage';
 import CommonText from '@components/commons/CommonText';
 import _ from 'lodash';
 import {useNavigation} from '@react-navigation/native';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import AssetsScreen from '../AssetsScreen';
+import NFTsScreen from '../NFTsScreen';
+
+const Tab = createMaterialTopTabNavigator();
 
 export default function BitcoinHomeTabBarScreen() {
     const {language} = useSelector(state => state.LanguageReducer);
@@ -15,39 +20,47 @@ export default function BitcoinHomeTabBarScreen() {
     useEffect( () => {
 
     }, []);
-    return (
-        <SafeAreaView style={[styles.container,{backgroundColor : theme.backgroundColor1}]}>
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <View style={styles.transactionList}>
-                    <View style={styles.marketPlaceList}>
-                        {
-                            _.map(data, function (item) {
-                                return (
-                                    <CommonTouchableOpacity style={styles.marketPlaceItem} key={item.id} onPress={() => {
-                                        navigation.navigate("MarketplaceDetailScreen", {item: item})
-                                    }}>
-                                        <View style={styles.marketPlaceItemIcon}>
-                                            <CommonImage source={{uri: item.logo}} style={styles.marketPlaceIcon}/>
-                                        </View>
-                                        <View style={styles.marketPlaceItemInformation}>
-                                            <CommonText style={styles.marketPlaceItemTitle}>{item.name}</CommonText>
-                                            <CommonText style={styles.marketPlaceItemDesc}>{item.desc}</CommonText>
-                                        </View>
-                                    </CommonTouchableOpacity>
-                                )
-                            })
-                        }
-                    </View>
-                </View>
-            </ScrollView>
 
-        </SafeAreaView>
-    );
+    return (
+        <View style={[styles.container,{backgroundColor : theme.backgroundColor1}]}>
+            <Tab.Navigator style={{borderRadius: 5}}>
+                <Tab.Screen name="Assets" component={() => {
+                    return (
+                            <ScrollView showsVerticalScrollIndicator={false}>
+                                <View style={styles.transactionList}>
+                                    <View style={styles.marketPlaceList}>
+                                        {
+                                            _.map(data, function (item) {
+                                                return (
+                                                    <CommonTouchableOpacity style={styles.marketPlaceItem} key={item.id} onPress={() => {
+                                                        navigation.navigate("MarketplaceDetailScreen", {item: item})
+                                                    }}>
+                                                        <View style={styles.marketPlaceItemIcon}>
+                                                            <CommonImage source={{uri: item.logo}} style={styles.marketPlaceIcon}/>
+                                                        </View>
+                                                        <View style={styles.marketPlaceItemInformation}>
+                                                            <CommonText style={styles.marketPlaceItemTitle}>{item.name}</CommonText>
+                                                            <CommonText style={styles.marketPlaceItemDesc}>{item.desc}</CommonText>
+                                                        </View>
+                                                    </CommonTouchableOpacity>
+                                                )
+                                            })
+                                        }
+                                    </View>
+                                </View>
+                            </ScrollView>
+                    )
+                }} />
+                <Tab.Screen name="NFT" component={NFTsScreen} />
+            </Tab.Navigator>
+        </View>
+    )
 }
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        borderRadius: 5,
     },
     transactionList: {
         width: '100%',
