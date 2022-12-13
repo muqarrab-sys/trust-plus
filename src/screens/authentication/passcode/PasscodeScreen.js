@@ -16,16 +16,21 @@ export default function PasscodeScreen({navigation, route}) {
   const pinDotsContainer = () => {
     return (
       <View style={styles.pinDotsContainer}>
-        {[1,2,3,4,5,6].map(length => (
-          <View style={[styles.dots, {
-            borderColor: theme.backgroundColor2,
-            backgroundColor: length <= pinLength ? theme.backgroundColor2 : 'transparent',
-          }]}/>
+        {[1, 2, 3, 4, 5, 6].map(length => (
+          <View
+            key={length.toString()}
+            style={[
+              styles.dots,
+              {
+                borderColor: theme.backgroundColor2,
+                backgroundColor: length <= pinLength ? theme.backgroundColor2 : 'transparent',
+              },
+            ]}
+          />
         ))}
       </View>
     );
   };
-
 
   return (
     <Root>
@@ -41,7 +46,7 @@ export default function PasscodeScreen({navigation, route}) {
           }}
           getCurrentPinLength={val => setPinLength(val)}
           passwordComponent={pinDotsContainer}
-          customBackSpaceIcon={(props) => (
+          customBackSpaceIcon={props => (
             <View style={styles.backspace}>
               <Remove fill={props.colorDelete} opacity={props.opacity} />
             </View>
@@ -49,7 +54,7 @@ export default function PasscodeScreen({navigation, route}) {
           colorPassword={theme.buttonColor1}
           styleAlphabet={{color: theme.buttonColor1}}
           numbersButtonOverlayColor={theme.buttonColor1}
-          stylePinCodeButtonCircle={{ backgroundColor: 'transparent', borderRadius: 0 }}
+          stylePinCodeButtonCircle={{backgroundColor: 'transparent', borderRadius: 0}}
           stylePinCodeButtonNumber={theme.textColor7}
           stylePinCodeTextButtonCircle={{fontSize: 32, fontWeight: '700'}}
           stylePinCodeCircle={{
@@ -58,7 +63,7 @@ export default function PasscodeScreen({navigation, route}) {
             borderRadius: 7.5,
             backgroundColor: 'transparent',
             borderWidth: 1,
-            borderColor: theme.backgroundColor2
+            borderColor: theme.backgroundColor2,
           }}
           stylePinCodeDeleteButtonColorHideUnderlay={theme.textColor7}
           stylePinCodeDeleteButtonColorShowUnderlay={theme.buttonColor1}

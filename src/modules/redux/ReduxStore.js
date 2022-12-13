@@ -6,19 +6,20 @@ import CurrencyReducer from '@persistence/currency/CurrencyReducer';
 import TokenReducer from '@persistence/token/TokenReducer';
 import WalletReducer from '@persistence/wallet/WalletReducer';
 import AssetReducer from '@persistence/asset/AssetReducer';
-
+import MulticoinReducer from '@persistence/multicoin/MulticoinReducer';
 const ReduxStore = configureStore({
-    reducer: {
-        LanguageReducer,
-        ThemeReducer,
-        UserReducer,
-        WalletReducer,
-        CurrencyReducer,
-        TokenReducer,
-        AssetReducer,
-    },
-    middleware: getDefaultMiddleware({
-        serializableCheck: false,
-    }),
+  reducer: {
+    LanguageReducer,
+    ThemeReducer,
+    UserReducer,
+    WalletReducer,
+    CurrencyReducer,
+    TokenReducer,
+    AssetReducer,
+    MulticoinReducer,
+  },
+  middleware: getDefaultMiddleware({
+    serializableCheck: false,
+  }),
 });
 export default ReduxStore;

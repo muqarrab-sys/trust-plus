@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {Jiro} from 'react-native-textinput-effects';
 import _ from 'lodash';
 
@@ -39,13 +33,11 @@ export default function WalletAddressTextInput({...rest}) {
 
       {!_.isNil(error) && <Text style={styles.error}>{error?.message}</Text>}
       <View style={styles.controls}>
+        <CommonTouchableOpacity onPress={onPastePress}>
+          <CommonText style={{color: theme.textColor4}}>{lang?.paste}</CommonText>
+        </CommonTouchableOpacity>
         <CommonTouchableOpacity onPress={onScanPress}>
           <Scan />
-        </CommonTouchableOpacity>
-        <CommonTouchableOpacity onPress={onPastePress}>
-          <CommonText style={{color: theme.textColor4}}>
-            {lang?.paste}
-          </CommonText>
         </CommonTouchableOpacity>
       </View>
     </View>

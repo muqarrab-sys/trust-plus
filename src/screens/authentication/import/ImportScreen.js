@@ -41,13 +41,8 @@ export default function ImportScreen({navigation, route}) {
           navigation.navigate('MultiCoinScreen');
         }}
         key={item.id.toString()}>
-        <View
-          style={{width: 60, justifyContent: 'center', alignItems: 'center'}}>
-          <CommonImage
-            source={{uri: item.logoURI}}
-            resizeMode={'contain'}
-            style={{width: 32, height: 32}}
-          />
+        <View style={{width: 60, justifyContent: 'center', alignItems: 'center'}}>
+          <CommonImage source={{uri: item.logoURI}} resizeMode={'contain'} style={{width: 32, height: 32}} />
         </View>
         <View style={{flex: 1, justifyContent: 'center'}}>
           <CommonText style={{fontSize: 14}}>{item.name}</CommonText>
@@ -57,8 +52,7 @@ export default function ImportScreen({navigation, route}) {
   };
   return (
     <Root>
-      <SafeAreaView
-        style={[styles.container, {backgroundColor: theme.backgroundColor1}]}>
+      <SafeAreaView style={[styles.container, {backgroundColor: theme.backgroundColor1}]}>
         <View style={[styles.header, {backgroundColor: theme.mainColor}]}>
           <CommonBackButton
             color={'white'}
@@ -72,11 +66,7 @@ export default function ImportScreen({navigation, route}) {
           <View style={{width: 40}}></View>
         </View>
         <View style={styles.contentContainer}>
-          <CommonFlatList
-            data={chains}
-            keyExtractor={item => item.id.toString()}
-            renderItem={renderItem}
-          />
+          <CommonFlatList data={chains} keyExtractor={item => item.id.toString()} renderItem={renderItem} />
         </View>
       </SafeAreaView>
     </Root>

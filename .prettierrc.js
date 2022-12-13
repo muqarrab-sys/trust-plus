@@ -1,5 +1,5 @@
 module.exports = {
-  printWidth: 180,
+  printWidth: 150,
   bracketSpacing: false,
   jsxBracketSameLine: true,
   singleQuote: true,

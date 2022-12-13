@@ -9,19 +9,18 @@ import QRCode from 'react-native-qrcode-svg';
 import Copy from '@components/icons/Copy';
 import Dollar from '@components/icons/Dollar';
 import Share from '@components/icons/Share';
+import Clipboard from '@react-native-clipboard/clipboard';
 
 export default function BitcoinReceiveScreen({navigation, route}) {
   const lang = useSelector(state => state.LanguageReducer.language);
   const {theme} = useSelector(state => state.ThemeReducer);
   const {activeWallet} = useSelector(state => state.WalletReducer);
   const copyToClipboard = data => {
-    console.log('data===>>>', data);
     Clipboard.setString(data);
   };
   return (
     <Root>
-      <SafeAreaView
-        style={[styles.container, {backgroundColor: theme.backgroundColor1}]}>
+      <SafeAreaView style={[styles.container, {backgroundColor: theme.backgroundColor1}]}>
         <View style={[styles.header, {backgroundColor: theme.mainColor}]}>
           <CommonBackButton
             color={'white'}
@@ -35,79 +34,47 @@ export default function BitcoinReceiveScreen({navigation, route}) {
         <View style={styles.contentContainer}>
           <View style={styles.qrCode}>
             <View style={styles.qrCodeHeader}>
-              <CommonText
-                style={[styles.text, styles.title, {color: theme.textColor4}]}>
-                My Trust Wallet
-              </CommonText>
+              <CommonText style={[styles.text, styles.title, {color: theme.textColor4}]}>My Trust Wallet</CommonText>
             </View>
-            <QRCode
-              value={activeWallet.address}
-              size={240}
-              backgroundColor={'white'}
-            />
+            <QRCode value={activeWallet.address} size={240} backgroundColor={'white'} />
             <View style={styles.qrCodeFooter}>
-              <CommonText style={styles.text}>
-                {activeWallet.address}
-              </CommonText>
+              <CommonText style={styles.text}>{activeWallet.address}</CommonText>
             </View>
           </View>
           <View style={styles.description}>
             <CommonText style={styles.text}>
               {lang.sendOnly} {activeWallet.network.symbol} {lang.toThisAddress}
             </CommonText>
-            <CommonText style={styles.text}>
-              {lang.sendingAnyOtherCoins}
-            </CommonText>
+            <CommonText style={styles.text}>{lang.sendingAnyOtherCoins}</CommonText>
           </View>
           <View style={styles.controls}>
             <CommonTouchableOpacity
               style={styles.element}
               onPress={() => {
-                console.log(
-                  'activeWallet.address====>>>',
-                  activeWallet?.address,
-                );
+                console.log('activeWallet.address====>>>', activeWallet?.address);
                 copyToClipboard(activeWallet?.address);
               }}>
-              <View
-                style={[
-                  styles.elementIcon,
-                  {backgroundColor: theme.buttonColor1},
-                ]}>
+              <View style={[styles.elementIcon, {backgroundColor: theme.buttonColor1}]}>
                 <Copy />
               </View>
-              <CommonText style={{color: theme.textColor4}}>
-                {lang.copy}
-              </CommonText>
+              <CommonText style={{color: theme.textColor4}}>{lang.copy}</CommonText>
             </CommonTouchableOpacity>
-            <CommonTouchableOpacity
+            {/* <CommonTouchableOpacity
               style={styles.element}
               onPress={() => {
                 console.log('item?.address===>>>', activeWallet?.address);
                 copyToClipboard(activeWallet?.address);
               }}>
-              <View
-                style={[
-                  styles.elementIcon,
-                  {backgroundColor: theme.buttonColor3},
-                ]}>
+              <View style={[styles.elementIcon, {backgroundColor: theme.buttonColor3}]}>
                 <Dollar />
               </View>
-              <CommonText style={{color: theme.textColor4}}>
-                {lang.setAmount}
-              </CommonText>
-            </CommonTouchableOpacity>
+              <CommonText style={{color: theme.textColor4}}>{lang.setAmount}</CommonText>
+            </CommonTouchableOpacity> */}
             <CommonTouchableOpacity style={styles.element} onPress={() => {}}>
-              <View
-                style={[
-                  styles.elementIcon,
-                  {backgroundColor: theme.buttonColor3},
-                ]}>
+              <View style={[styles.elementIcon, {backgroundColor: theme.buttonColor3}]}>
                 <Share />
               </View>
-              <CommonText style={{color: theme.textColor4}}>
-                {lang.share}
-              </CommonText>
+              <CommonText style={{color: theme.textColor4}}>{lang.share}</CommonText>
             </CommonTouchableOpacity>
           </View>
         </View>

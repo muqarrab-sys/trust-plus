@@ -1,7 +1,4 @@
-import {
-  CardStyleInterpolators,
-  createStackNavigator,
-} from '@react-navigation/stack';
+import {CardStyleInterpolators, createStackNavigator} from '@react-navigation/stack';
 import React, {useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import BottomTabBarNavigator from '@modules/navigation/BottomTabBarNavigator';
@@ -56,6 +53,13 @@ import SmartChainAssetScannerScreen from '@screens/smartchain/asset/SmartChainAs
 import EthereumAssetScannerScreen from '@screens/ethereum/asset/EthereumAssetScannerScreen';
 import EthereumScannerScreen from '@screens/ethereum/EthereumScannerScreen';
 import BitcoinScannerScreen from '@screens/bitcoin/BitcoinScannerScreen';
+import MulticoinListScreen from '@screens/multicoin/MulticoinListScreen';
+import MultiCoinReceiveScreen from '@screens/multicoin/MultiCoinReceiveScreen';
+import MulticoinSendScreen from '@screens/multicoin/MulticoinSendScreen';
+import NotificationScreen from '@screens/notification/NotificationScreen';
+import TransactionScreen from '@screens/transaction/TransactionScreen';
+import BuyScreen from '@screens/buy/BuyScreen';
+import WebViewScreen from '@screens/webview/WebViewScreen';
 
 const Stack = createStackNavigator();
 
@@ -68,151 +72,61 @@ function StackNavigator({style}) {
           headerShown: false,
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         }}>
-        <Stack.Screen
-          name="BottomTabBarNavigator"
-          component={BottomTabBarNavigator}
-        />
+        <Stack.Screen name="BottomTabBarNavigator" component={BottomTabBarNavigator} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="AssetScreen" component={EthereumAssetScreen} />
         <Stack.Screen name="WalletListScreen" component={WalletListScreen} />
-        <Stack.Screen
-          name="AddWalletStep1Screen"
-          component={AddWalletStep1Screen}
-        />
-        <Stack.Screen
-          name="AddWalletStep2Screen"
-          component={AddWalletStep2Screen}
-        />
-        <Stack.Screen
-          name="AddWalletStep3Screen"
-          component={AddWalletStep3Screen}
-        />
-        <Stack.Screen name="BitcoinSendScreen" component={BitcoinSendScreen} />
-        <Stack.Screen
-          name="BitcoinConfirmationScreen"
-          component={BitcoinConfirmationScreen}
-        />
-        <Stack.Screen
-          name="BitcoinTransactionScreen"
-          component={BitcoinTransactionScreen}
-        />
-        <Stack.Screen
-          name="BitcoinTransactionDetailScreen"
-          component={BitcoinTransactionDetailScreen}
-        />
-        <Stack.Screen
-          name="BitcoinReceiveScreen"
-          component={BitcoinReceiveScreen}
-        />
-        <Stack.Screen
-          name="BitcoinExportScreen"
-          component={BitcoinExportScreen}
-        />
-        <Stack.Screen
-          name="BitcoinScannerScreen"
-          component={BitcoinScannerScreen}
-        />
+        <Stack.Screen name="AddWalletStep1Screen" component={AddWalletStep1Screen} />
+        <Stack.Screen name="AddWalletStep2Screen" component={AddWalletStep2Screen} />
+        <Stack.Screen name="AddWalletStep3Screen" component={AddWalletStep3Screen} />
+
+        <Stack.Screen name="NotificationScreen" component={NotificationScreen} />
+        <Stack.Screen name="BuyScreen" component={BuyScreen} />
+        <Stack.Screen name="WebViewScreen" component={WebViewScreen} />
 
         <Stack.Screen
-          name="MarketplaceDetailScreen"
-          component={MarketplaceDetailScreen}
+          name="MulticoinListScreen"
+          options={{cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS}}
+          component={MulticoinListScreen}
         />
-        <Stack.Screen
-          name="EthereumSendScreen"
-          component={EthereumSendScreen}
-        />
-        <Stack.Screen
-          name="EthereumReceiveScreen"
-          component={EthereumReceiveScreen}
-        />
-        <Stack.Screen
-          name="EthereumConfirmationScreen"
-          component={EthereumConfirmationScreen}
-        />
-        <Stack.Screen
-          name="EthereumTransactionScreen"
-          component={EthereumTransactionScreen}
-        />
-        <Stack.Screen
-          name="EthereumTransactionDetailScreen"
-          component={EthereumTransactionDetailScreen}
-        />
-        <Stack.Screen
-          name="EthereumAssetScreen"
-          component={EthereumAssetScreen}
-        />
-        <Stack.Screen
-          name="EthereumAssetReceiveScreen"
-          component={EthereumAssetReceiveScreen}
-        />
-        <Stack.Screen
-          name="EthereumAssetSendScreen"
-          component={EthereumAssetSendScreen}
-        />
-        <Stack.Screen
-          name="EthereumAssetConfirmationScreen"
-          component={EthereumAssetConfirmationScreen}
-        />
-        <Stack.Screen
-          name="EthereumAssetTransactionScreen"
-          component={EthereumAssetTransactionScreen}
-        />
-        <Stack.Screen
-          name="EthereumAssetTransactionDetailScreen"
-          component={EthereumAssetTransactionDetailScreen}
-        />
-        <Stack.Screen
-          name="SmartChainAssetScreen"
-          component={SmartChainAssetScreen}
-        />
-        <Stack.Screen
-          name="SmartChainAssetReceiveScreen"
-          component={SmartChainAssetReceiveScreen}
-        />
-        <Stack.Screen
-          name="SmartChainAssetSendScreen"
-          component={SmartChainAssetSendScreen}
-        />
-        <Stack.Screen
-          name="SmartChainAssetConfirmationScreen"
-          component={SmartChainAssetConfirmationScreen}
-        />
-        <Stack.Screen
-          name="SmartChainAssetTransactionScreen"
-          component={SmartChainAssetTransactionScreen}
-        />
-        <Stack.Screen
-          name="SmartChainAssetTransactionDetailScreen"
-          component={SmartChainAssetTransactionDetailScreen}
-        />
-        <Stack.Screen
-          name="EthereumExportScreen"
-          component={EthereumExportScreen}
-        />
-        <Stack.Screen
-          name="SmartChainSendScreen"
-          component={SmartChainSendScreen}
-        />
-        <Stack.Screen
-          name="SmartChainReceiveScreen"
-          component={SmartChainReceiveScreen}
-        />
-        <Stack.Screen
-          name="SmartChainConfirmationScreen"
-          component={SmartChainConfirmationScreen}
-        />
-        <Stack.Screen
-          name="SmartChainTransactionScreen"
-          component={SmartChainTransactionScreen}
-        />
-        <Stack.Screen
-          name="SmartChainTransactionDetailScreen"
-          component={SmartChainTransactionDetailScreen}
-        />
-        <Stack.Screen
-          name="SmartChainExportScreen"
-          component={SmartChainExportScreen}
-        />
+        <Stack.Screen name="MulticoinSendScreen" component={MulticoinSendScreen} />
+        <Stack.Screen name="MultiCoinReceiveScreen" component={MultiCoinReceiveScreen} />
+
+        <Stack.Screen name="TransactionScreen" component={TransactionScreen} />
+
+        <Stack.Screen name="BitcoinSendScreen" component={BitcoinSendScreen} />
+        <Stack.Screen name="BitcoinConfirmationScreen" component={BitcoinConfirmationScreen} />
+        <Stack.Screen name="BitcoinTransactionScreen" component={BitcoinTransactionScreen} />
+        <Stack.Screen name="BitcoinTransactionDetailScreen" component={BitcoinTransactionDetailScreen} />
+        <Stack.Screen name="BitcoinReceiveScreen" component={BitcoinReceiveScreen} />
+        <Stack.Screen name="BitcoinExportScreen" component={BitcoinExportScreen} />
+        <Stack.Screen name="BitcoinScannerScreen" component={BitcoinScannerScreen} />
+
+        <Stack.Screen name="MarketplaceDetailScreen" component={MarketplaceDetailScreen} />
+        <Stack.Screen name="EthereumSendScreen" component={EthereumSendScreen} />
+        <Stack.Screen name="EthereumReceiveScreen" component={EthereumReceiveScreen} />
+        <Stack.Screen name="EthereumConfirmationScreen" component={EthereumConfirmationScreen} />
+        <Stack.Screen name="EthereumTransactionScreen" component={EthereumTransactionScreen} />
+        <Stack.Screen name="EthereumTransactionDetailScreen" component={EthereumTransactionDetailScreen} />
+        <Stack.Screen name="EthereumAssetScreen" component={EthereumAssetScreen} />
+        <Stack.Screen name="EthereumAssetReceiveScreen" component={EthereumAssetReceiveScreen} />
+        <Stack.Screen name="EthereumAssetSendScreen" component={EthereumAssetSendScreen} />
+        <Stack.Screen name="EthereumAssetConfirmationScreen" component={EthereumAssetConfirmationScreen} />
+        <Stack.Screen name="EthereumAssetTransactionScreen" component={EthereumAssetTransactionScreen} />
+        <Stack.Screen name="EthereumAssetTransactionDetailScreen" component={EthereumAssetTransactionDetailScreen} />
+        <Stack.Screen name="SmartChainAssetScreen" component={SmartChainAssetScreen} />
+        <Stack.Screen name="SmartChainAssetReceiveScreen" component={SmartChainAssetReceiveScreen} />
+        <Stack.Screen name="SmartChainAssetSendScreen" component={SmartChainAssetSendScreen} />
+        <Stack.Screen name="SmartChainAssetConfirmationScreen" component={SmartChainAssetConfirmationScreen} />
+        <Stack.Screen name="SmartChainAssetTransactionScreen" component={SmartChainAssetTransactionScreen} />
+        <Stack.Screen name="SmartChainAssetTransactionDetailScreen" component={SmartChainAssetTransactionDetailScreen} />
+        <Stack.Screen name="EthereumExportScreen" component={EthereumExportScreen} />
+        <Stack.Screen name="SmartChainSendScreen" component={SmartChainSendScreen} />
+        <Stack.Screen name="SmartChainReceiveScreen" component={SmartChainReceiveScreen} />
+        <Stack.Screen name="SmartChainConfirmationScreen" component={SmartChainConfirmationScreen} />
+        <Stack.Screen name="SmartChainTransactionScreen" component={SmartChainTransactionScreen} />
+        <Stack.Screen name="SmartChainTransactionDetailScreen" component={SmartChainTransactionDetailScreen} />
+        <Stack.Screen name="SmartChainExportScreen" component={SmartChainExportScreen} />
         <Stack.Screen name="UniswapScreen" component={UniswapScreen} />
         <Stack.Screen name="ERC20TokenScreen" component={ERC20TokenScreen} />
         <Stack.Screen name="PancakeswapScreen" component={PancakeswapScreen} />
@@ -223,22 +137,10 @@ function StackNavigator({style}) {
         <Stack.Screen name="PreferenceScreen" component={PreferenceScreen} />
         <Stack.Screen name="SecurityScreen" component={SecurityScreen} />
         <Stack.Screen name="LanguageScreen" component={LanguageScreen} />
-        <Stack.Screen
-          name="SmartChainScannerScreen"
-          component={SmartChainScannerScreen}
-        />
-        <Stack.Screen
-          name="SmartChainAssetScannerScreen"
-          component={SmartChainAssetScannerScreen}
-        />
-        <Stack.Screen
-          name="EthereumAssetScannerScreen"
-          component={EthereumAssetScannerScreen}
-        />
-        <Stack.Screen
-          name="EthereumScannerScreen"
-          component={EthereumScannerScreen}
-        />
+        <Stack.Screen name="SmartChainScannerScreen" component={SmartChainScannerScreen} />
+        <Stack.Screen name="SmartChainAssetScannerScreen" component={SmartChainAssetScannerScreen} />
+        <Stack.Screen name="EthereumAssetScannerScreen" component={EthereumAssetScannerScreen} />
+        <Stack.Screen name="EthereumScannerScreen" component={EthereumScannerScreen} />
       </Stack.Navigator>
     </View>
   );

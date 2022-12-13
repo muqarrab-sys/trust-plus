@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import RBSheet from "react-native-raw-bottom-sheet";
+import RBSheet from 'react-native-raw-bottom-sheet';
 class CommonAlert extends Component {
   static _ref = null;
 
@@ -17,50 +17,49 @@ class CommonAlert extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      content : null
+      content: null,
     };
   }
   _setState(reducer) {
     return new Promise(resolve => this.setState(reducer, () => resolve()));
   }
-  show({ ...config }) {
+  show({...config}) {
     const newConfig = {...config};
     this._setState(newConfig);
-    this.RBSheet.open()
+    this.RBSheet.open();
   }
-  clearState(){
+  clearState() {
     this._setState({
       show: false,
-      content: null
+      content: null,
     });
   }
   hide() {
     this.RBSheet.close();
     this.clearState();
   }
-  static show({ ...config }) {
-    this._ref.show({ ...config });
+  static show({...config}) {
+    this._ref.show({...config});
   }
   static hide() {
     this._ref.hide();
   }
   render() {
     const {content} = this.state;
-    return(
-        <RBSheet
-            ref={ref => {
-              this.RBSheet = ref;
-            }}
-            height={300}
-            openDuration={250}
-            customStyles={{
-              container: {
-                alignItems: "center"
-              }
-            }}
-        >
-          {content}
-        </RBSheet>
+    return (
+      <RBSheet
+        ref={ref => {
+          this.RBSheet = ref;
+        }}
+        height={300}
+        openDuration={250}
+        customStyles={{
+          container: {
+            alignItems: 'center',
+          },
+        }}>
+        {content}
+      </RBSheet>
     );
   }
 }

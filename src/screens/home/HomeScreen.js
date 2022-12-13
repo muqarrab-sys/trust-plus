@@ -1,240 +1,108 @@
-import React, {useEffect, useState} from 'react';
-import {
-  Image,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import React, {useEffect} from 'react';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {useSelector} from 'react-redux';
 import CommonText from '@components/commons/CommonText';
-import Bell from '@components/icons/Bell';
-import Filter from '@components/icons/Filter';
 import CommonTouchableOpacity from '@components/commons/CommonTouchableOpacity';
-import ArrowUp from '@components/icons/ArrowUp';
-import ArrowDown from '@components/icons/ArrowDown';
-import HomeTabBarScreen from '@screens/home/HomeTabBarScreen';
-import CommonCurrency from '@components/commons/CommonCurrency';
-import Time from '@components/icons/Time';
-import BitcoinHomeTabBarScreen from '@screens/home/bitcoin/BitcoinHomeTabBarScreen';
-import CommonTokenIcon from '@components/commons/CommonTokenIcon';
-import {WalletService} from '@persistence/wallet/WalletService';
 import {useNavigation} from '@react-navigation/native';
-import CommonBackButton from '@components/commons/CommonBackButton';
-import {cos} from 'react-native-reanimated';
 import Cash from '@components/icons/Cash';
 import Swap from '@components/icons/Swap';
 import Send from '@components/icons/Send';
 import Receive from '@components/icons/Receive';
+import MulticoinHomeTabBarScreen from '@screens/home/multicoin/MulticoinHomeTabBarScreen';
+import MultiCoinHeader from './multicoin/MultiCoinHeader';
 
 export default function MainScreen({route}) {
-  const dispatch = useDispatch();
   const navigation = useNavigation();
   const lang = useSelector(state => state?.LanguageReducer?.language);
   const {theme} = useSelector(state => state?.ThemeReducer);
-  const {activeWallet} = useSelector(state => state?.WalletReducer);
-  console.log('activeWalllet====>>>', activeWallet);
-  console.log('lang===>>>', lang);
+  // const {activeWallet} = useSelector(state => state?.WalletReducer);
+  const {activeMulticoinWallet} = useSelector(state => state?.MulticoinReducer);
+  // console.log('activeMulticoinWallet', activeMulticoinWallet.wallets[2]);
   useEffect(() => {
     (async () => {
       //await WalletService.getSubscribeWallets();
     })();
   }, []);
+
   return (
-    <SafeAreaView
-      style={[styles.container, {backgroundColor: theme.buttonColor1}]}>
-      <View style={[styles.top, {backgroundColor: theme.buttonColor1}]}></View>
-      <View style={styles.header}>
-        <View style={{flex: 0.5}}>
-          <CommonTouchableOpacity>
-            <Bell />
-          </CommonTouchableOpacity>
-        </View>
-
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <CommonCurrency
-            style={[styles.balanceText, {color: theme.textColor3}]}
-            value={activeWallet?.balance?.fiat}/>
-        </View>
-
-        <View style={{flex: 0.5}} />
-        {activeWallet?.network?.symbol !== 'BTC' && (
-          <CommonTouchableOpacity
-            onPress={() => {
-              navigation?.navigate('TokenScreen');
-            }}>
-            <Filter />
-          </CommonTouchableOpacity>
-        )}
-      </View>
+    <SafeAreaView style={[styles.container, {backgroundColor: theme.buttonColor1}]}>
+      <View style={[styles.top, {backgroundColor: theme.buttonColor1}]} />
+      <MultiCoinHeader />
       <View style={styles.balance}>
-        <CommonText style={[styles.walletText, {color: theme.textColor3}]}>
-          {activeWallet?.name}
-        </CommonText>
+        <CommonText style={[styles.walletText, {color: theme.textColor3}]}>{activeMulticoinWallet?.name}</CommonText>
       </View>
       <View style={styles.controlContainer}>
         <View style={styles.control}>
           <CommonTouchableOpacity
             style={styles.element}
-            onPress={() => console.log('pressed')}>
+            onPress={() => {
+              if (activeMulticoinWallet) {
+                navigation?.navigate('MulticoinListScreen', {next: 'BuyScreen', title: 'Buy'});
+              }
+            }}>
             <View style={styles.elementIcon}>
               <Cash />
             </View>
-            <CommonText style={{color: theme.textColor3}}>
-              {lang?.buy}
-            </CommonText>
-          </CommonTouchableOpacity>
-          <CommonTouchableOpacity
-            style={styles.element}
-            onPress={() => console.log('pressed')}>
-            <View style={styles.elementIcon}>
-              <Swap />
-            </View>
-            <CommonText style={{color: theme.textColor3}}>
-              {lang?.swap}
-            </CommonText>
+            <CommonText style={{color: theme.textColor3}}>{lang?.buy}</CommonText>
           </CommonTouchableOpacity>
           <CommonTouchableOpacity
             style={styles.element}
             onPress={() => {
-              // console.log('====================================');
-              // console.log('kfsdbsbsfgn', activeWallet?.network?.symbol);
-              // console.log('====================================');
-              // let nextScreen = 'BitcoinSendScreen';
-              // console.log('nextScreen', nextScreen);
-              if (activeWallet?.network?.symbol === 'ETH') {
-                console.log('====================================');
-                console.log(
-                  'kfsdbsbsfgn',
-                  'EthereumSendScreen',
-                  activeWallet?.network?.symbol,
-                );
-                console.log('====================================');
-                // nextScreen = 'EthereumSendScreen';
-                navigation.navigate('EthereumSendScreen');
-                // console.log('nextScreen===inEthereum>>>>', nextScreen);
-              } else if (activeWallet?.network?.symbol === 'BNB') {
-                // nextScreen = 'SmartChainSendScreen';
-                navigation.navigate('SmartChainSendScreen');
-              } else if (activeWallet?.network?.symbol == 'BTC') {
-                navigation.navigate('BitcoinSendScreen');
+              if (activeMulticoinWallet) {
+                navigation?.navigate('MulticoinListScreen', {next: 'DexScreen', title: 'Swap'});
               }
-              // navigation.navigate(nextScreen);
+            }}>
+            <View style={styles.elementIcon}>
+              <Swap />
+            </View>
+            <CommonText style={{color: theme.textColor3}}>{lang?.swap}</CommonText>
+          </CommonTouchableOpacity>
+          <CommonTouchableOpacity
+            style={styles.element}
+            onPress={() => {
+              // const symbols = {
+              //   BTC: 'EthereumSendScreen',
+              //   ETH: 'SmartChainSendScreen',
+              //   BNB: 'BitcoinSendScreen',
+              // };
+              // if (activeWallet?.network?.symbol in symbols) {
+              //   navigation?.navigate(symbols[activeWallet?.network?.symbol]);
+              // }
+              if (activeMulticoinWallet) {
+                navigation?.navigate('MulticoinListScreen', {next: 'MulticoinSendScreen', title: 'Send'});
+              }
             }}>
             <View style={styles.elementIcon}>
               <Send />
             </View>
-            <CommonText style={{color: theme.textColor3}}>
-              {lang?.send}
-            </CommonText>
+            <CommonText style={{color: theme.textColor3}}>{lang?.send}</CommonText>
           </CommonTouchableOpacity>
           <CommonTouchableOpacity
             style={styles.element}
             onPress={() => {
-              console.log(
-                'activeWallet?.network?.symbol===>>>',
-                activeWallet?.network?.symbol,
-              );
-              let nextScreen = 'BitcoinReceiveScreen';
-              if (activeWallet?.network?.symbol === 'ETH') {
-                nextScreen = 'EthereumReceiveScreen';
-              } else if (activeWallet?.network?.symbol === 'BNB') {
-                nextScreen = 'SmartChainReceiveScreen';
+              // const symbols = {
+              //   BTC: 'BitcoinReceiveScreen',
+              //   ETH: 'EthereumReceiveScreen',
+              //   BNB: 'SmartChainReceiveScreen',
+              // };
+              // if (activeWallet?.network?.symbol in symbols) {
+              //   navigation?.navigate(symbols[activeWallet?.network?.symbol]);
+              // }
+              if (activeMulticoinWallet) {
+                navigation?.navigate('MulticoinListScreen', {next: 'MultiCoinReceiveScreen', title: 'Receive'});
               }
-              navigation.navigate(nextScreen);
             }}>
             <View style={styles.elementIcon}>
               <Receive />
             </View>
-            <CommonText style={{color: theme.textColor3}}>
-              {lang?.receive}
-            </CommonText>
+            <CommonText style={{color: theme.textColor3}}>{lang?.receive}</CommonText>
           </CommonTouchableOpacity>
-
-          {/* <CommonTouchableOpacity
-            style={styles.element}
-            onPress={() => {
-              // console.log('====================================');
-              // console.log('kfsdbsbsfgn', activeWallet?.network?.symbol);
-              // console.log('====================================');
-              // let nextScreen = 'BitcoinSendScreen';
-              // console.log('nextScreen', nextScreen);
-              if (activeWallet?.network?.symbol === 'ETH') {
-                console.log('====================================');
-                console.log(
-                  'kfsdbsbsfgn',
-                  'EthereumSendScreen',
-                  activeWallet?.network?.symbol,
-                );
-                console.log('====================================');
-                // nextScreen = 'EthereumSendScreen';
-                navigation.navigate('EthereumSendScreen');
-                // console.log('nextScreen===inEthereum>>>>', nextScreen);
-              } else if (activeWallet?.network?.symbol === 'BNB') {
-                // nextScreen = 'SmartChainSendScreen';
-                navigation.navigate('SmartChainSendScreen');
-              } else if (activeWallet?.network?.symbol == 'BTC') {
-                navigation.navigate('BitcoinSendScreen');
-              }
-              // navigation.navigate(nextScreen);
-            }}>
-            <View style={styles.elementIcon}>
-              <ArrowUp />
-            </View>
-            <CommonText style={{color: theme.textColor3}}>
-              {lang?.send}
-            </CommonText>
-          </CommonTouchableOpacity>
-          <CommonTouchableOpacity
-            style={styles.element}
-            onPress={() => {
-              console.log(
-                'activeWallet?.network?.symbol===>>>',
-                activeWallet?.network?.symbol,
-              );
-              let nextScreen = 'BitcoinReceiveScreen';
-              if (activeWallet?.network?.symbol === 'ETH') {
-                nextScreen = 'EthereumReceiveScreen';
-              } else if (activeWallet?.network?.symbol === 'BNB') {
-                nextScreen = 'SmartChainReceiveScreen';
-              }
-              navigation.navigate(nextScreen);
-            }}>
-            <View style={styles.elementIcon}>
-              <ArrowDown />
-            </View>
-            <CommonText style={{color: theme.textColor3}}>
-              {lang.receive}
-            </CommonText>
-          </CommonTouchableOpacity>
-          <CommonTouchableOpacity
-            style={styles.element}
-            onPress={() => {
-              let nextScreen = 'BitcoinTransactionScreen';
-              if (activeWallet?.network?.symbol === 'ETH') {
-                nextScreen = 'EthereumTransactionScreen';
-              } else if (activeWallet?.network?.symbol === 'BNB') {
-                nextScreen = 'SmartChainTransactionScreen';
-              }
-              navigation?.navigate(nextScreen);
-            }}>
-            <View style={styles.elementIcon}>
-              <Time />
-            </View>
-            <CommonText style={{color: theme.textColor3}}>
-              {lang?.history}
-            </CommonText>
-          </CommonTouchableOpacity> */}
         </View>
       </View>
       <View style={styles.contentContainer}>
-        {activeWallet?.network?.symbol === 'BTC' ? (
-          <BitcoinHomeTabBarScreen />
-        ) : (
-          <HomeTabBarScreen />
-        )}
+        <MulticoinHomeTabBarScreen />
       </View>
+      {/* <View style={styles.contentContainer}>{activeWallet?.network?.symbol === 'BTC' ? <BitcoinHomeTabBarScreen /> : <HomeTabBarScreen />}</View> */}
     </SafeAreaView>
   );
 }
@@ -389,3 +257,65 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
+
+// <CommonTouchableOpacity
+//   style={styles.element}
+//   onPress={() => {
+//     // console.log('====================================');
+//     // console.log('kfsdbsbsfgn', activeWallet?.network?.symbol);
+//     // console.log('====================================');
+//     // let nextScreen = 'BitcoinSendScreen';
+//     // console.log('nextScreen', nextScreen);
+//     if (activeWallet?.network?.symbol === 'ETH') {
+//       console.log('====================================');
+//       console.log('kfsdbsbsfgn', 'EthereumSendScreen', activeWallet?.network?.symbol);
+//       console.log('====================================');
+//       // nextScreen = 'EthereumSendScreen';
+//       navigation.navigate('EthereumSendScreen');
+//       // console.log('nextScreen===inEthereum>>>>', nextScreen);
+//     } else if (activeWallet?.network?.symbol === 'BNB') {
+//       // nextScreen = 'SmartChainSendScreen';
+//       navigation.navigate('SmartChainSendScreen');
+//     } else if (activeWallet?.network?.symbol == 'BTC') {
+//       navigation.navigate('BitcoinSendScreen');
+//     }
+//     // navigation.navigate(nextScreen);
+//   }}>
+//   <View style={styles.elementIcon}>
+//     <ArrowUp />
+//   </View>
+//   <CommonText style={{color: theme.textColor3}}>{lang?.send}</CommonText>
+// </CommonTouchableOpacity>
+// <CommonTouchableOpacity
+//   style={styles.element}
+//   onPress={() => {
+//     console.log('activeWallet?.network?.symbol===>>>', activeWallet?.network?.symbol);
+//     let nextScreen = 'BitcoinReceiveScreen';
+//     if (activeWallet?.network?.symbol === 'ETH') {
+//       nextScreen = 'EthereumReceiveScreen';
+//     } else if (activeWallet?.network?.symbol === 'BNB') {
+//       nextScreen = 'SmartChainReceiveScreen';
+//     }
+//     navigation.navigate(nextScreen);
+//   }}>
+//   <View style={styles.elementIcon}>
+//     <ArrowDown />
+//   </View>
+//   <CommonText style={{color: theme.textColor3}}>{lang.receive}</CommonText>
+// </CommonTouchableOpacity>
+// <CommonTouchableOpacity
+//   style={styles.element}
+//   onPress={() => {
+//     let nextScreen = 'BitcoinTransactionScreen';
+//     if (activeWallet?.network?.symbol === 'ETH') {
+//       nextScreen = 'EthereumTransactionScreen';
+//     } else if (activeWallet?.network?.symbol === 'BNB') {
+//       nextScreen = 'SmartChainTransactionScreen';
+//     }
+//     navigation?.navigate(nextScreen);
+//   }}>
+//   <View style={styles.elementIcon}>
+//     <Time />
+//   </View>
+//   <CommonText style={{color: theme.textColor3}}>{lang?.history}</CommonText>
+// </CommonTouchableOpacity>

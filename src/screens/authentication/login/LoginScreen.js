@@ -7,14 +7,14 @@ import {UserAction} from '@persistence/user/UserAction';
 import CommonLoading from '@components/commons/CommonLoading';
 import {CurrencyAction} from '@persistence/currency/CurrencyAction';
 import {WalletAction} from '@persistence/wallet/WalletAction';
+import {MulticoinAction} from '@persistence/multicoin/MulticoinAction';
 
 export default function LoginScreen({navigation}) {
   const dispatch = useDispatch();
   const {theme} = useSelector(state => state.ThemeReducer);
   return (
     <Root>
-      <SafeAreaView
-        style={[styles.container, {backgroundColor: theme.backgroundColor1}]}>
+      <SafeAreaView style={[styles.container, {backgroundColor: theme.backgroundColor1}]}>
         <PINCode
           touchIDDisabled={true}
           colorPassword={theme.buttonColor1}
@@ -24,7 +24,7 @@ export default function LoginScreen({navigation}) {
           passwordLength={6}
           finishProcess={pinCode => {
             CommonLoading.show();
-            dispatch(WalletAction.getActiveWallet()).then(multiCoinWallet => {
+            dispatch(MulticoinAction.getActiveMulticoinWallet()).then(() => {
               dispatch(CurrencyAction.getCurrency()).then(() => {
                 dispatch(UserAction.signIn({}));
                 CommonLoading.hide();

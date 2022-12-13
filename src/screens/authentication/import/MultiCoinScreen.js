@@ -10,7 +10,7 @@ import CommonTextInput from '@components/commons/CommonTextInput';
 import CommonButton from '@components/commons/CommonButton';
 import CommonLoading from '@components/commons/CommonLoading';
 import uuid from 'react-native-uuid';
-import {applicationProperties} from '@src/application.properties';
+import {applicationProperties, NETWORKS} from '@src/application.properties';
 import {MulticoinAction} from '@persistence/multicoin/MulticoinAction';
 import {Controller, useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
@@ -50,7 +50,7 @@ export default function MultiCoinScreen({navigation, route}) {
       id: uuid.v4(),
       name: name,
       balance: 0.0,
-      network: applicationProperties.btcNetwork,
+      network: NETWORKS.btcNetwork,
       mnemonics: mnemonics.trim(),
     };
     dispatch(MulticoinAction.add(params)).then(({success, data}) => {

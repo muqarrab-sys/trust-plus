@@ -13,7 +13,7 @@ const LOCK_TIME_TIMESTAMP_THRESHOLD = 5000000;
  * @returns int             Satoshi value (int)
  */
 const toSatoshi = function (btc) {
-    return parseInt((btc * COIN).toFixed(0), 10);
+  return parseInt((btc * COIN).toFixed(0), 10);
 };
 
 /**
@@ -23,7 +23,7 @@ const toSatoshi = function (btc) {
  * @returns {string}        BTC value (float)
  */
 const toBTC = function (satoshi) {
-    return bitcoinUnit(satoshi, 'satoshi').to('BTC').value();
+  return bitcoinUnit(satoshi, 'satoshi').to('BTC').value();
 };
 /**
  * convert a Satoshi value to fixed decimals
@@ -32,10 +32,10 @@ const toBTC = function (satoshi) {
  * @returns {string}        BTC value (float)
  */
 const toFixed = function (satoshi, fixed) {
-    if (satoshi) {
-        return satoshi.toFixed(fixed || 2)
-    }
-    return '';
+  if (satoshi) {
+    return satoshi.toFixed(fixed || 2);
+  }
+  return '';
 };
 
 /**
@@ -45,18 +45,18 @@ const toFixed = function (satoshi, fixed) {
  * @returns [{object}]      transactions
  */
 const validate = async (address, network) => {
-    try {
-        bitcoin.address.toOutputScript(address, network)
-        return true
-    } catch (e) {
-        return false
-    }
-}
+  try {
+    bitcoin.address.toOutputScript(address, network);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
 
 const BitcoinUtil = {
-    toSatoshi,
-    toBTC,
-    validate,
-    toFixed
-}
+  toSatoshi,
+  toBTC,
+  validate,
+  toFixed,
+};
 export default BitcoinUtil;

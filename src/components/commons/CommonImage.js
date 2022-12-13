@@ -1,11 +1,6 @@
 import React from 'react';
-import {Image} from "react-native";
+import FastImage from 'react-native-fast-image';
 
 export default function CommonImage({...rest}) {
-    return (
-        <Image resizeMode={'contain'}  {...rest} onLoad={(e)=>{
-
-        }} onError={({ nativeEvent: { error } }) => {
-        }}/>
-    );
+  return <FastImage resizeMode={FastImage.resizeMode.contain} {...rest} onLoad={e => {}} onError={({nativeEvent: {error}}) => {}} />;
 }

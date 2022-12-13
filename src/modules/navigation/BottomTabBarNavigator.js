@@ -16,101 +16,82 @@ import ICO from '@components/icons/ICO';
 const Tab = createBottomTabNavigator();
 
 export default function BottomTabBarNavigator() {
-    const {theme} = useSelector(state => state.ThemeReducer);
-    const {language} = useSelector(state => state.LanguageReducer);
-    const {activeWallet} = useSelector((state) => state.WalletReducer);
-    useEffect(() => {
-
-    }, []);
-    return (
-        <Tab.Navigator
-            tabBarOptions={{
-                activeTintColor: '#fff',
-                inactiveTintColor: 'lightgray',
-                style: {backgroundColor: theme.backgroundColor3},
-            }}>
-            <Tab.Screen
-                name="HomeScreen"
-                component={HomeScreen}
-                options={{
-                    tabBarLabel: ({focused}) => {
-                        let color = theme.alternativeTextColor;
-                        if (focused) {
-                            color = theme.textColor4;
-                        }
-                        return (
-                            <CommonText style={[styles.label, {color: color}]}>
-                                {language.wallet}
-                            </CommonText>
-                        );
-                    },
-                    tabBarIcon: ({focused}) => <Wallet focused={focused}/>,
-                }}
-            />
-            {
-                activeWallet.network.symbol !== 'BTC' &&
-                <Tab.Screen
-                    name="ICOScreen"
-                    component={ICOScreen}
-                    options={{
-                        tabBarLabel: ({focused}) => {
-                            let color = theme.alternativeTextColor;
-                            if (focused) {
-                                color = theme.textColor4;
-                            }
-                            return (
-                                <CommonText style={[styles.label, {color: color}]}>
-                                    {language.ico}
-                                </CommonText>
-                            );
-                        },
-                        tabBarIcon: ({focused}) => <ICO focused={focused}/>,
-                    }}
-                />
+  const {theme} = useSelector(state => state.ThemeReducer);
+  const {language} = useSelector(state => state.LanguageReducer);
+  const {activeWallet} = useSelector(state => state.WalletReducer);
+  useEffect(() => {}, []);
+  return (
+    <Tab.Navigator
+      tabBarOptions={{
+        activeTintColor: '#fff',
+        inactiveTintColor: 'lightgray',
+        style: {backgroundColor: theme.backgroundColor3},
+      }}>
+      <Tab.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{
+          tabBarLabel: ({focused}) => {
+            let color = theme.alternativeTextColor;
+            if (focused) {
+              color = theme.textColor4;
             }
-            {
-                activeWallet.network.symbol !== 'BTC' &&
-                <Tab.Screen
-                    name="SwapNavigator"
-                    component={SwapNavigator}
-                    options={{
-                        tabBarLabel: ({focused}) => {
-                            let color = theme.alternativeTextColor;
-                            if (focused) {
-                                color = theme.textColor4;
-                            }
-                            return (
-                                <CommonText style={[styles.label, {color: color}]}>
-                                    {language.dex}
-                                </CommonText>
-                            );
-                        },
-                        tabBarIcon: ({focused}) => <Dex focused={focused}/>,
-                    }}
-                />
-            }
+            return <CommonText style={[styles.label, {color: color}]}>{language.wallet}</CommonText>;
+          },
+          tabBarIcon: ({focused}) => <Wallet focused={focused} />,
+        }}
+      />
+      {/* {activeWallet.network.symbol !== 'BTC' && false && (
+        <React.Fragment>
+          <Tab.Screen
+            name="ICOScreen"
+            component={ICOScreen}
+            options={{
+              tabBarLabel: ({focused}) => {
+                let color = theme.alternativeTextColor;
+                if (focused) {
+                  color = theme.textColor4;
+                }
+                return <CommonText style={[styles.label, {color: color}]}>{language.ico}</CommonText>;
+              },
+              tabBarIcon: ({focused}) => <ICO focused={focused} />,
+            }}
+          />
 
-            <Tab.Screen
-                name="SettingScreen"
-                component={SettingScreen}
-                options={{
-                    tabBarLabel: ({focused}) => {
-                        let color = theme.alternativeTextColor;
-                        if (focused) {
-                            color = theme.textColor4;
-                        }
-                        return (
-                            <CommonText style={[styles.label, {color: color}]}>
-                                {language.setting}
-                            </CommonText>
-                        );
-                    },
-                    tabBarIcon: ({focused}) => <Setting focused={focused}/>,
-                }}
-            />
-        </Tab.Navigator>
-    );
+          <Tab.Screen
+            name="SwapNavigator"
+            component={SwapNavigator}
+            options={{
+              tabBarLabel: ({focused}) => {
+                let color = theme.alternativeTextColor;
+                if (focused) {
+                  color = theme.textColor4;
+                }
+                return <CommonText style={[styles.label, {color: color}]}>{language.dex}</CommonText>;
+              },
+              tabBarIcon: ({focused}) => <Dex focused={focused} />,
+            }}
+          />
+        </React.Fragment>
+      )} */}
+
+      <Tab.Screen
+        name="SettingScreen"
+        component={SettingScreen}
+        options={{
+          tabBarLabel: ({focused}) => {
+            let color = theme.alternativeTextColor;
+            if (focused) {
+              color = theme.textColor4;
+            }
+            return <CommonText style={[styles.label, {color: color}]}>{language.setting}</CommonText>;
+          },
+          tabBarIcon: ({focused}) => <Setting focused={focused} />,
+        }}
+      />
+    </Tab.Navigator>
+  );
 }
 const styles = StyleSheet.create({
-    label: {fontSize: 10},
+  label: {fontSize: 10},
 });

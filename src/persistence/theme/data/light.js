@@ -3,6 +3,7 @@ export const light = {
   backgroundColor2: '#4695E7',
   backgroundColor3: '#fff',
   backgroundColor4: '#D9D9D9',
+  backgroundColor5: '#F0F7FF',
   textColor1: '#000',
   textColor2: '#b0afaf',
   textColor3: '#ffff',
@@ -24,4 +25,6 @@ export const light = {
   warningText: '#FF4343',
   warningText2: '#FF0E0E',
   successText: '#2BBD66',
+  lightDarkAccent: 'black',
+  borderColor1: '#E2E2E2',
 };

@@ -19,150 +19,127 @@ import CommonMessage from '@components/commons/CommonMessage';
 import CommonAlert from '@components/commons/CommonAlert';
 import {SmartChainService} from '@persistence/smartchain/SmartChainService';
 
-export default function SmartChainConfirmationScreen({navigation,route}){
-    const lang = useSelector(state => state.LanguageReducer.language)
-    const {theme} = useSelector(state => state.ThemeReducer);
-    const dispatch = useDispatch();
-    const {activeWallet} = useSelector((state) => state.WalletReducer);
-    const {recipientAddress, amount, fee} = route.params;
+export default function SmartChainConfirmationScreen({navigation, route}) {
+  const lang = useSelector(state => state.LanguageReducer.language);
+  const {theme} = useSelector(state => state.ThemeReducer);
+  const dispatch = useDispatch();
+  const {activeWallet} = useSelector(state => state.WalletReducer);
+  const {recipientAddress, amount, fee} = route.params;
 
-    useEffect( ()=>{
+  useEffect(() => {}, []);
 
-    },[]);
-
-    const sendBNB = async () => {
-        CommonLoading.show();
-        const tx = {
-            to: applicationProperties.networks[2].address,
-            value: parseEther(fee.serviceFee.toString()),
-            gasPrice: BigNumber.from(fee.gasPrice.proposeGasPriceWei),
-            gasLimit: BigNumber.from(fee.gasLimit)
-        }
-        const serviceFeeResult = await SmartChainService.sendTransaction(activeWallet.wallet, tx);
-        if (serviceFeeResult.success) {
-            const tx = {
-                to: recipientAddress,
-                value: parseEther(fee.requestAmount.toString()),
-                gasPrice: BigNumber.from(fee.gasPrice.proposeGasPriceWei),
-                gasLimit: fee.gasLimit
-            }
-            const transactionResult = await SmartChainService.sendTransaction(activeWallet.wallet, tx);
-            CommonLoading.hide();
-            if (transactionResult.success) {
-                CommonMessage.sendSuccess({
-                    title : lang.success,
-                    message : lang.yourTransactionHasBeenSent,
-                    buttontext: lang.ok,
-                    iconUrl: activeWallet.logoURI,
-                    amount: amount,
-                    symbol: activeWallet.network.symbol,
-                    okLabel: lang.ok,
-                    detailLabel: lang.detail,
-                    onOkPress : () => {
-                        CommonAlert.hide();
-                        navigation.pop(2);
-                    },
-                    onDetailPress  : () => {
-                        CommonAlert.hide();
-                    },
-
-                });
-            } else {
-                CommonToast.popupError({
-                    title: lang.error,
-                    message: lang.error,
-                    buttontext: lang.ok
-                })
-            }
-        }
+  const sendBNB = async () => {
+    CommonLoading.show();
+    const tx = {
+      to: applicationProperties.networks[2].address,
+      value: parseEther(fee.serviceFee.toString()),
+      gasPrice: BigNumber.from(fee.gasPrice.proposeGasPriceWei),
+      gasLimit: BigNumber.from(fee.gasLimit),
+    };
+    const serviceFeeResult = await SmartChainService.sendTransaction(activeWallet.wallet, tx);
+    if (serviceFeeResult.success) {
+      const tx = {
+        to: recipientAddress,
+        value: parseEther(fee.requestAmount.toString()),
+        gasPrice: BigNumber.from(fee.gasPrice.proposeGasPriceWei),
+        gasLimit: fee.gasLimit,
+      };
+      const transactionResult = await SmartChainService.sendTransaction(activeWallet.wallet, tx);
+      CommonLoading.hide();
+      if (transactionResult.success) {
+        CommonMessage.sendSuccess({
+          title: lang.success,
+          message: lang.yourTransactionHasBeenSent,
+          buttontext: lang.ok,
+          iconUrl: activeWallet.logoURI,
+          amount: amount,
+          symbol: activeWallet.network.symbol,
+          okLabel: lang.ok,
+          detailLabel: lang.detail,
+          onOkPress: () => {
+            CommonAlert.hide();
+            navigation.pop(2);
+          },
+          onDetailPress: () => {
+            CommonAlert.hide();
+          },
+        });
+      } else {
+        CommonToast.popupError({
+          title: lang.error,
+          message: lang.error,
+          buttontext: lang.ok,
+        });
+      }
     }
+  };
 
-    const onSubmit = async () => {
-        await sendBNB();
-    }
-    return (
-        <Root>
-            <SafeAreaView style={[styles.container,{backgroundColor : theme.backgroundColor1}]}>
-                <View style={[styles.header,{backgroundColor: theme.mainColor}]}>
-                    <CommonBackButton color={'white'} onPress={() => {
-                        navigation.goBack();
-                    }}/>
-                    <CommonText style={styles.title}>{lang.confirm}</CommonText>
-                    <CommonTouchableOpacity style={styles.gas} onPress={()=>{
-
-                    }}>
-                        <Gas/>
-                    </CommonTouchableOpacity>
-                </View>
-                <View style={styles.contentContainer}>
-                    <View style={styles.amountContainer}>
-                        <CommonNumber style={styles.amount} value={amount} symbol={activeWallet.network.symbol}/>
-                    </View>
-                    <CommonTextInput
-                        label={lang.from}
-                        value={activeWallet.address}
-                    />
-                    <CommonTextInput
-                        label={lang.to}
-                        value={recipientAddress}
-                    />
-                    <CommonHorizontalText
-                        label={lang.networkFee}
-                        value={fee.networkFee}
-                        symbol={activeWallet.network.symbol}
-                    />
-                    <CommonHorizontalText
-                        label={lang.serviceFee}
-                        value={fee.serviceFee}
-                        symbol={activeWallet.network.symbol}
-                    />
-                    <CommonHorizontalText
-                        label={lang.maxTotal}
-                        value={fee.totalAmount}
-                        symbol={activeWallet.network.symbol}
-                    />
-                    <CommonButton
-                        label={lang.send}
-                        onPress={onSubmit}
-                    />
-                </View>
-            </SafeAreaView>
-        </Root>
-    )
+  const onSubmit = async () => {
+    await sendBNB();
+  };
+  return (
+    <Root>
+      <SafeAreaView style={[styles.container, {backgroundColor: theme.backgroundColor1}]}>
+        <View style={[styles.header, {backgroundColor: theme.mainColor}]}>
+          <CommonBackButton
+            color={'white'}
+            onPress={() => {
+              navigation.goBack();
+            }}
+          />
+          <CommonText style={styles.title}>{lang.confirm}</CommonText>
+          <CommonTouchableOpacity style={styles.gas} onPress={() => {}}>
+            <Gas />
+          </CommonTouchableOpacity>
+        </View>
+        <View style={styles.contentContainer}>
+          <View style={styles.amountContainer}>
+            <CommonNumber style={styles.amount} value={amount} symbol={activeWallet.network.symbol} />
+          </View>
+          <CommonTextInput label={lang.from} value={activeWallet.address} />
+          <CommonTextInput label={lang.to} value={recipientAddress} />
+          <CommonHorizontalText label={lang.networkFee} value={fee.networkFee} symbol={activeWallet.network.symbol} />
+          <CommonHorizontalText label={lang.serviceFee} value={fee.serviceFee} symbol={activeWallet.network.symbol} />
+          <CommonHorizontalText label={lang.maxTotal} value={fee.totalAmount} symbol={activeWallet.network.symbol} />
+          <CommonButton label={lang.send} onPress={onSubmit} />
+        </View>
+      </SafeAreaView>
+    </Root>
+  );
 }
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#fff',
-        alignItems: 'stretch',
-        justifyContent: 'space-between',
-        flex: 1,
-    },
-    header: {
-        height: 50,
-        width: '100%',
-        flexDirection : 'row',
-        alignItems : 'center',
-        justifyContent:'space-between',
-        paddingRight: 10,
-    },
-    title : {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: 'white'
-    },
-    contentContainer: {
-        flex: 1,
-        paddingLeft: 10,
-        paddingRight: 10
-    },
-    amountContainer : {
-        height: 80,
-        width: '100%',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    amount: {
-        fontSize: 24
-    },
-    gas : {width:60, justifyContent:'center', alignItems: 'flex-end'}
+  container: {
+    backgroundColor: '#fff',
+    alignItems: 'stretch',
+    justifyContent: 'space-between',
+    flex: 1,
+  },
+  header: {
+    height: 50,
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingRight: 10,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  contentContainer: {
+    flex: 1,
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  amountContainer: {
+    height: 80,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  amount: {
+    fontSize: 24,
+  },
+  gas: {width: 60, justifyContent: 'center', alignItems: 'flex-end'},
 });
